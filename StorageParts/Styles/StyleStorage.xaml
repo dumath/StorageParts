@@ -1,0 +1,12 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:StorageParts.Styles">
+
+    <ImageBrush x:Key="BackgroundBase" ImageSource="Images/Gears.jpg"/>
+
+    <Style x:Key="MainBackground" TargetType="Page">
+        <Setter Property="Background" Value="{StaticResource BackgroundBase}"/>
+    </Style>
+
+</ResourceDictionary>
