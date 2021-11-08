@@ -164,10 +164,12 @@ namespace StorageParts
             {
                 try
                 {
+                    storageTable.Items.Clear();
                     var fileStream = await storageFile.OpenAsync(FileAccessMode.ReadWrite);
                     var inputStream = fileStream.GetInputStreamAt(0);
                     using (TextReader reader = new StreamReader(inputStream.AsStreamForRead()))
                     {
+                        this.parts.Clear();
                         string s = reader.ReadLine();
                         while (s != null)
                         {
@@ -176,7 +178,7 @@ namespace StorageParts
                         }
                     }
                     ((IDisposable)fileStream).Dispose();
-                     
+
                 }
                 
                 catch(Exception ex)
@@ -271,6 +273,7 @@ namespace StorageParts
                     }
                     await FileIO.WriteLinesAsync(newFile, strings);
                     strings.Clear();
+                    
                     return true;
                 }
                 return false;
