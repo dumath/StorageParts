@@ -38,11 +38,11 @@ namespace StorageParts
             this.InitializeComponent();
             this.activeWindow = storageWindow;
             this.parts = new List<Part>();
-            //TODO: Перенести в "Создать"
         }
         #endregion
 
         #region AppBarButtons 
+        //Добавить новую позицию.
         private void Click_Add(object sender, RoutedEventArgs e)
         {
             //Меняем Grid
@@ -59,9 +59,9 @@ namespace StorageParts
             sellField.Text = String.Empty;
             fcField.Text = String.Empty;
             scField.Text = String.Empty;
-
         }
 
+        //Изменить позицию.
         private void Click_Edit(object sender, RoutedEventArgs e)
         {
             if (storageTable.SelectedIndex != -1)
@@ -86,10 +86,10 @@ namespace StorageParts
                     addButton.Visibility = Visibility.Collapsed;
                     changeButton.Visibility = Visibility.Visible;
                 }
-
             }
         }
 
+        //Удалить позицию.
         private void Click_Delete(object sender, RoutedEventArgs e)
         {
             if (storageTable.SelectedIndex != -1)
@@ -289,7 +289,7 @@ namespace StorageParts
         #endregion
 
         #region Other Methods
-        //Мето возвращения на сетку главного окна
+        //Мето возвращения на сетку главного окна.
         private void ReturnToMainWindow(object sender, RoutedEventArgs e)
         {
             this.activeWindow.Visibility = Visibility.Collapsed;
@@ -299,6 +299,10 @@ namespace StorageParts
             addButton.Visibility = Visibility.Visible;
         }
 
+        /// <summary>
+        /// Метод инициализации коллекции parts из выбранного пользователем файла.
+        /// </summary>
+        /// <param name="s">Строка файла, инициализирующая один объект класса Part</param>
         private void InitializeDB(string s)
         {
             Part p = new Part(s);
@@ -309,14 +313,7 @@ namespace StorageParts
             }
         }
 
-
-        #endregion
-
-
-
-
-
-        //Метод добавления объекта
+        //Метод добавления объекта в сетку.
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -350,7 +347,7 @@ namespace StorageParts
 
         }
 
-        //Метод изменения объекта
+        //Метод изменения объекта в сетке.
         private void Change_CLick(object sender, RoutedEventArgs e)
         {
             string s = storageTable.SelectedItem.ToString();
@@ -370,6 +367,10 @@ namespace StorageParts
             storageTable.Items.Insert(iST, parts[i].ToString());
             this.ReturnToMainWindow(null, null);
         }
+        #endregion
+
+
+
     }
 
 }
