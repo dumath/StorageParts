@@ -27,7 +27,7 @@ namespace StorageParts
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        
+
         private Grid activeWindow; //Переменная, отслеживающая активное окно.
         private List<Part> parts; //Список запчастей
         List<string> strings; //Коллекция, для инициализации класса Part
@@ -64,10 +64,10 @@ namespace StorageParts
 
         private void Click_Edit(object sender, RoutedEventArgs e)
         {
-            if(storageTable.SelectedIndex != -1)
+            if (storageTable.SelectedIndex != -1)
             {
                 string s = storageTable.SelectedItem.ToString();
-                if(s != null)
+                if (s != null)
                 {
                     int p = parts.FindIndex(x => x.Equals(new Part(s)));
                     activeWindow.Visibility = Visibility.Collapsed;
@@ -86,13 +86,13 @@ namespace StorageParts
                     addButton.Visibility = Visibility.Collapsed;
                     changeButton.Visibility = Visibility.Visible;
                 }
-                
+
             }
         }
 
         private void Click_Delete(object sender, RoutedEventArgs e)
         {
-            if(storageTable.SelectedIndex != -1)
+            if (storageTable.SelectedIndex != -1)
             {
                 string s = storageTable.SelectedItem.ToString();
                 int i = this.parts.FindIndex(x => x.Equals(new Part(s)));
@@ -117,9 +117,10 @@ namespace StorageParts
         #endregion
 
         #region Methods Open/Close/Save
+        //Метод создания нового файла
         private async void createFile_Click(object sender, RoutedEventArgs e)
         {
-            if(storageTable.Items.Count != 0)
+            if (storageTable.Items.Count != 0)
             {
                 ContentDialog contentDialog = new ContentDialog();
                 contentDialog.Title = "Создание нового файла";
@@ -127,18 +128,19 @@ namespace StorageParts
                 contentDialog.SecondaryButtonText = "Не сохранять";
                 contentDialog.CloseButtonText = "Отмена";
                 var result = await contentDialog.ShowAsync();
-                if(result == ContentDialogResult.Primary)
+                if (result == ContentDialogResult.Primary)
                 {
-                    if(await saveFile())
+                    if (await saveFile())
                     {
                         this.parts = new List<Part>();
                         storageTable.Items.Clear();
                     }
                 }
-                else if(result == ContentDialogResult.Secondary)
+                else if (result == ContentDialogResult.Secondary)
                 {
                     this.parts = new List<Part>();
                     storageTable.Items.Clear();
+
                 }
                 else
                 {
@@ -146,44 +148,48 @@ namespace StorageParts
                 }
                 return;
             }
-            
+
         }
 
+        //Метод выбора файлов
         private async void selectFile_Click(object sender, RoutedEventArgs e)
         {
-            try
+            FileOpenPicker fileOpenPicker = new FileOpenPicker();
+            fileOpenPicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
+            fileOpenPicker.ViewMode = PickerViewMode.List;
+            fileOpenPicker.FileTypeFilter.Add("*");
+            StorageFile storageFile = await fileOpenPicker.PickSingleFileAsync();
+            this.strings = new List<string>();
+            if (storageFile != null)
             {
-                FileOpenPicker fileOpenPicker = new FileOpenPicker();
-                fileOpenPicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
-                fileOpenPicker.ViewMode = PickerViewMode.List;
-                fileOpenPicker.FileTypeFilter.Add("*");
-                StorageFile storageFile = await fileOpenPicker.PickSingleFileAsync();
-                this.strings = new List<string>();
-                if (storageFile != null)
+                try
                 {
                     var fileStream = await storageFile.OpenAsync(FileAccessMode.ReadWrite);
                     var inputStream = fileStream.GetInputStreamAt(0);
-                    TextReader reader = new StreamReader(inputStream.AsStreamForRead());
-                    string s = reader.ReadLine();
-                    while(s != null)
+                    using (TextReader reader = new StreamReader(inputStream.AsStreamForRead()))
                     {
-                        this.InitializeDB(s);
-                        s = reader.ReadLine();
+                        string s = reader.ReadLine();
+                        while (s != null)
+                        {
+                            this.InitializeDB(s);
+                            s = reader.ReadLine();
+                        }
                     }
+                    ((IDisposable)fileStream).Dispose();
+                     
                 }
-            }
-            catch(Exception ex)
-            {
-                MessageDialog msg = new MessageDialog(ex.Message);
-                msg.ShowAsync();
                 
-            }
-            finally
-            {
+                catch(Exception ex)
+                {
+                    MessageDialog msg = new MessageDialog(ex.Message + "Метод открыть");
+                    msg.ShowAsync();
+                    
+                }
                 
             }
         }
 
+        //Метод сохранения как
         private async void saveAsFile_Click(object sender, TappedRoutedEventArgs e)
         {
             try
@@ -198,18 +204,20 @@ namespace StorageParts
                     await FileIO.WriteTextAsync(newFile, parts[0].ToString()); //второй параметр изменяется. 
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageDialog msg = new MessageDialog(ex.Message);
+                MessageDialog msg = new MessageDialog(ex.Message + " Метод Сохранить как");
                 msg.ShowAsync();
             }
             finally
             {
-                
+
             }
-           
+
         }
 
+        //Метод сохранения файла
+        //TODO:Добавить сохранение без вывода окна открытого файла
         private async void saveFile_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -224,13 +232,13 @@ namespace StorageParts
                 if (newFile != null)
                 {
                     List<string> strings = new List<string>();
-                    foreach(Part p in parts)
+                    foreach (Part p in parts)
                     {
                         strings.Add(p.ToString());
                     }
 
                     await FileIO.WriteLinesAsync(newFile, strings);
-                    
+
                 }
             }
             catch (Exception ex)
@@ -244,7 +252,7 @@ namespace StorageParts
             }
         }
 
-        //TODO: Переделать
+        
         private async System.Threading.Tasks.Task<bool> saveFile()
         {
             try
@@ -261,15 +269,15 @@ namespace StorageParts
                     {
                         strings.Add(p.ToString());
                     }
-
                     await FileIO.WriteLinesAsync(newFile, strings);
+                    strings.Clear();
                     return true;
                 }
                 return false;
             }
             catch (Exception ex)
             {
-                MessageDialog msg = new MessageDialog(ex.Message);
+                MessageDialog msg = new MessageDialog(ex.Message + "Внутренний сохранить");
                 msg.ShowAsync();
                 return false;
             }
@@ -277,6 +285,7 @@ namespace StorageParts
         #endregion
 
         #region Other Methods
+        //Мето возвращения на сетку главного окна
         private void ReturnToMainWindow(object sender, RoutedEventArgs e)
         {
             this.activeWindow.Visibility = Visibility.Collapsed;
@@ -289,7 +298,7 @@ namespace StorageParts
         private void InitializeDB(string s)
         {
             Part p = new Part(s);
-            if(parts!=null)
+            if (parts != null)
             {
                 this.parts.Add(p);
                 storageTable.Items.Add(p.ToString());
@@ -298,6 +307,9 @@ namespace StorageParts
 
 
         #endregion
+
+
+
 
 
         //Метод добавления объекта
@@ -321,17 +333,17 @@ namespace StorageParts
                 };
                 parts.Add(p);
                 storageTable.Items.Add(p.ToString());
-               
-                
-                this.ReturnToMainWindow(null,null);
+
+
+                this.ReturnToMainWindow(null, null);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageDialog msg = new MessageDialog(ex.Message);
                 msg.ShowAsync();
             }
-            
-   
+
+
         }
 
         //Метод изменения объекта
