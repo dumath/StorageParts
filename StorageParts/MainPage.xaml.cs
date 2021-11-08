@@ -117,13 +117,14 @@ namespace StorageParts
         #endregion
 
         #region Methods Open/Close/Save
-        //Метод создания нового файла
+        //Создать файл. TODO: Test
         private async void createFile_Click(object sender, RoutedEventArgs e)
         {
             if (storageTable.Items.Count != 0)
             {
                 ContentDialog contentDialog = new ContentDialog();
                 contentDialog.Title = "Создание нового файла";
+                contentDialog.Content = "Все имзенения будут отменены. Сохранить файл?";
                 contentDialog.PrimaryButtonText = "Сохранить";
                 contentDialog.SecondaryButtonText = "Не сохранять";
                 contentDialog.CloseButtonText = "Отмена";
@@ -132,15 +133,14 @@ namespace StorageParts
                 {
                     if (await saveFile())
                     {
-                        this.parts = new List<Part>();
+                        this.parts.Clear();
                         storageTable.Items.Clear();
                     }
                 }
                 else if (result == ContentDialogResult.Secondary)
                 {
-                    this.parts = new List<Part>();
+                    this.parts.Clear();
                     storageTable.Items.Clear();
-
                 }
                 else
                 {
@@ -148,10 +148,10 @@ namespace StorageParts
                 }
                 return;
             }
-
+            return;
         }
 
-        //Метод выбора файлов
+        //Открыть файл. Полностью готов.
         private async void selectFile_Click(object sender, RoutedEventArgs e)
         {
             FileOpenPicker fileOpenPicker = new FileOpenPicker();
@@ -178,20 +178,16 @@ namespace StorageParts
                         }
                     }
                     ((IDisposable)fileStream).Dispose();
-
                 }
-                
                 catch(Exception ex)
                 {
-                    MessageDialog msg = new MessageDialog(ex.Message + "Метод открыть");
+                    MessageDialog msg = new MessageDialog(ex.Message);
                     msg.ShowAsync();
-                    
                 }
-                
             }
         }
 
-        //Метод сохранения как
+        //Сохранить как файл.Test
         private async void saveAsFile_Click(object sender, TappedRoutedEventArgs e)
         {
             try
@@ -203,7 +199,12 @@ namespace StorageParts
                 var newFile = await fileSavePicker.PickSaveFileAsync();
                 if (newFile != null)
                 {
-                    await FileIO.WriteTextAsync(newFile, parts[0].ToString()); //второй параметр изменяется. 
+                    List<string> strings = new List<string>();
+                    foreach (Part p in parts)
+                    {
+                        strings.Add(p.ToString());
+                    }
+                    await FileIO.WriteLinesAsync(newFile, strings);
                 }
             }
             catch (Exception ex)
@@ -218,7 +219,7 @@ namespace StorageParts
 
         }
 
-        //Метод сохранения файла
+        //Сохранить файл.
         //TODO:Добавить сохранение без вывода окна открытого файла
         private async void saveFile_Click(object sender, RoutedEventArgs e)
         {
@@ -254,7 +255,7 @@ namespace StorageParts
             }
         }
 
-        
+        //Дополнительный метод сохранения.TODO: Тест, заменить.
         private async System.Threading.Tasks.Task<bool> saveFile()
         {
             try
