@@ -73,20 +73,52 @@
                     <ListBox x:Name="storageTable" Grid.Row="1" Grid.Column="1" Visibility="Visible"  ScrollViewer.HorizontalScrollMode="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
 
                     </ListBox>
-                    <AppBar x:Name="appBarSP" Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="Transparent">
+
+                    <!--<Grid x:Name="mainWindow" Margin="20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="20"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Row="0" Grid.Column="0" Content="N" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                        <Button Grid.Row="0" Grid.Column="1" Content="Бренд" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                        <Button Grid.Row="0" Grid.Column="2" Content="Класс" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                        <Button Grid.Row="0" Grid.Column="3" Content="Сер.N" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                        <Button Grid.Row="0" Grid.Column="4" Content="Ан.N" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                        <Button Grid.Row="0" Grid.Column="5" Content="Кол-во" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                        <Button Grid.Row="0" Grid.Column="6" Content="Покупка" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                        <Button Grid.Row="0" Grid.Column="7" Content="Продажа" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                        <Button Grid.Row="0" Grid.Column="8" Content="Ком.1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                        <Button Grid.Row="0" Grid.Column="9" Content="Ком.2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                    </Grid>-->
+
+
+
+
+                    <AppBar x:Name="appBarSP" Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right">
                         <Grid >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="10"/>
                                 <ColumnDefinition Width="8*"/>
-                                <ColumnDefinition Width="90"/>
-                                <ColumnDefinition Width="90"/>
-                                <ColumnDefinition Width="90"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
                                 <ColumnDefinition Width="10"/>
                             </Grid.ColumnDefinitions>
                             <AppBarButton Grid.Column="2" Label="Добавить" Icon="Add"    VerticalAlignment="Center" HorizontalAlignment="Center" Click="Click_Add"/>
-                            <AppBarButton Grid.Column="3" Label="Изменить" Icon="Edit"   VerticalAlignment="Center" HorizontalAlignment="Center" Click="Click_Edit">
-                                
-                            </AppBarButton>
+                            <AppBarButton Grid.Column="3" Label="Изменить" Icon="Edit"   VerticalAlignment="Center" HorizontalAlignment="Center" Click="Click_Edit"/>
                             <AppBarButton Grid.Column="4" Label="Удалить"  Icon="Delete" VerticalAlignment="Center" HorizontalAlignment="Center" Click="Click_Delete">
                             </AppBarButton>
                         </Grid>
@@ -120,7 +152,7 @@
                     </Grid.ColumnDefinitions>
                     <!--БРЕНД-->
                     <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Бренд" TextAlignment="Left" Width="180" />
-                    <TextBox x:Name="brandName"  Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="" PlaceholderText="Наименование бренда" TextAlignment="Right" Width="180" />
+                    <TextBox x:Name="brandName"  Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="" PlaceholderText="Наименование бренда" TextAlignment="Right" Width="180"/>
                     <TextBlock Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" Text="" TextAlignment="Center"/>
 
                     <!--ИМЯ-->

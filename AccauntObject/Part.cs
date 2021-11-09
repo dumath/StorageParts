@@ -10,23 +10,26 @@ namespace AccauntObject
     public class Part
     {
         #region Fields
-        private static int _number = 0;     //TODO:порядковый номер : для всех объектов(собственность класса)
+        //TODO:порядковый номер : для всех объектов(собственность класса)
+        private static int _number = 0;     //Общее количество созданных объектов.
         private string _brand;              //Бренд
         private string _name;               //Класс запчасти - наименование.
         private string _originalNumber;     //Номер по оригиналу 
         private string _analogNumber;       //Номер по аналогу
         private int _count;                 //Количество
-        private readonly decimal _buyPrice; //Цена покупки ??Нельзя изменить 
-        private decimal _sellPrice;         //Цена продажи ??Проверка - ввсегда должна быть больше закупочной
-        private string _firstComment;         //Первый комментарий ?? для чего первый
-        private string _secondComment;         //Второй комментарий ?? для чего второй
+        private readonly decimal _buyPrice; //Цена покупки !!Нельзя изменить 
+
+        //TODO:Проверка - _sellPrice всегда должна быть больше закупочной
+        private decimal _sellPrice;         //Цена продажи 
+        private string _firstComment;       //Первый комментарий ?? для чего первый
+        private string _secondComment;      //Второй комментарий ?? для чего второй
         #endregion
 
         #region Constructors
         //Пассивный конструктор
         public Part() { }
 
-        //Активный конструктор: Для полной инициализации объекта
+        //Активный конструктор: Для полной инициализации объекта.
         public Part(string brand, string name, string originalNumber, string analogNumber, int count, decimal buyPrice, decimal sellPrice, string firstComment, string secondCcomment)
         {
             _number += 1;
@@ -42,8 +45,6 @@ namespace AccauntObject
         }
 
         //Активный конструктор: Для инициализации объекта из базы данных.
-        //TODO: Добавить значения новых свойств.
-        //TODO: Добавить инструкцию итерации извлечения строк из файла.
         public Part(string stringDb)
         {
             string brand = stringDb.Substring(stringDb.IndexOf("Brand:"), stringDb.IndexOf("; Name"));
@@ -100,13 +101,13 @@ namespace AccauntObject
         #endregion
 
         #region Properties
-        //Порядковый номер 
+        //Количество созданных объектов.
         public static int Number
         {
             get => _number;
         }
 
-        //Бренд запчасти
+        //Бренд запчасти.
         public string Brand
         {
             get => this._brand;
@@ -116,7 +117,7 @@ namespace AccauntObject
             }
         }
 
-        //Имя запчасти(наименование)
+        //Имя запчасти(наименование).
         public string Name
         {
             get => this._name;
@@ -126,7 +127,7 @@ namespace AccauntObject
             }
         }
 
-        //Номер по оригиналу
+        //Номер по оригиналу.
         public string OriginalNumber
         {
             get => this._originalNumber;
@@ -136,7 +137,7 @@ namespace AccauntObject
             }
         }
 
-        //Номер по аналогу
+        //Номер по аналогу.
         public string AnalogNumber
         {
             get => this._analogNumber;
@@ -146,7 +147,7 @@ namespace AccauntObject
             }
         }
 
-        //Количество
+        //Количество.
         public int Count
         {
             get => this._count;
@@ -156,13 +157,13 @@ namespace AccauntObject
             }
         }
 
-        //Покупка
+        //Покупка.
         public decimal BuyPrice
         {
             get => this._buyPrice;
         }
 
-        //Продажа
+        //Продажа.
         public decimal SellPrice
         {
             get => this._sellPrice;
@@ -172,7 +173,7 @@ namespace AccauntObject
             }
         }
 
-        //первый комментарий
+        //Первый комментарий.
         public string FirstComment
         {
             get => this._firstComment;
@@ -182,7 +183,7 @@ namespace AccauntObject
             }
         }
 
-        //Второй комментарий
+        //Второй комментарий.
         public string SecondComment
         {
             get => this._secondComment;
@@ -201,7 +202,8 @@ namespace AccauntObject
             return $"Brand:{this._brand}; Name:{this._name}; ON:{this._originalNumber}; AN:{this._analogNumber}; Count:{this._count}; BuyPrice:{this._buyPrice}; SellPrice:{this._sellPrice}; FC:{this._firstComment}; SC:{this._secondComment}";
         }
 
-        //Реализовать сравнение Hash
+        //TODO: Реализовать сравнение Hash
+        //Метод сравнения двух Part объектов.
         public override bool Equals(object obj)
         {
             Part p = obj as Part;

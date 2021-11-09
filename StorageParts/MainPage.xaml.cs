@@ -173,7 +173,7 @@ namespace StorageParts
                         string s = reader.ReadLine();
                         while (s != null)
                         {
-                            this.InitializeDB(s);
+                            this.initializeDB(s);
                             s = reader.ReadLine();
                         }
                     }
@@ -288,7 +288,7 @@ namespace StorageParts
         }
         #endregion
 
-        #region Other Methods
+        #region Other Methods. Для упрощения кода.
         //Мето возвращения на сетку главного окна.
         private void ReturnToMainWindow(object sender, RoutedEventArgs e)
         {
@@ -303,7 +303,7 @@ namespace StorageParts
         /// Метод инициализации коллекции parts из выбранного пользователем файла.
         /// </summary>
         /// <param name="s">Строка файла, инициализирующая один объект класса Part</param>
-        private void InitializeDB(string s)
+        private void initializeDB(string s)
         {
             Part p = new Part(s);
             if (parts != null)
@@ -312,6 +312,8 @@ namespace StorageParts
                 storageTable.Items.Add(p.ToString());
             }
         }
+
+        
 
         //Метод добавления объекта в сетку.
         private void Save_Click(object sender, RoutedEventArgs e)
