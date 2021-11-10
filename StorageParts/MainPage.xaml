@@ -62,7 +62,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="10"/>
                         <RowDefinition Height="10*"/>
-                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="70"/>
                         <RowDefinition Height="10"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
@@ -70,56 +70,40 @@
                         <ColumnDefinition Width="10*"/>
                         <ColumnDefinition Width="10"/>
                     </Grid.ColumnDefinitions>
-                    <ListBox x:Name="storageTable" Grid.Row="1" Grid.Column="1" Visibility="Visible"  ScrollViewer.HorizontalScrollMode="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                    <ListBox x:Name="storageTable" Grid.Row="1" Grid.Column="1" Visibility="Collapsed"  ScrollViewer.HorizontalScrollMode="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
 
                     </ListBox>
+                    
 
-                    <!--<Grid x:Name="mainWindow" Margin="20" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="20"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition x:Name="zeroColumn" Width="40"/>
-                <ColumnDefinition x:Name="oneColumn" MinWidth="70" Width="*"/>
-                <ColumnDefinition x:Name="twoColumn" MinWidth="70" Width="*"/>
-                <ColumnDefinition x:Name="threeColumn" MinWidth="70" Width="*"/>
-                <ColumnDefinition x:Name="fourthColumn" MinWidth="70" Width="*"/>
-                <ColumnDefinition x:Name="fiveColumn" MinWidth="70" Width="*"/>
-                <ColumnDefinition x:Name="sixColumn" MinWidth="80" Width="*"/>
-                <ColumnDefinition x:Name="sevenColumn" MinWidth="80" Width="*"/>
-                <ColumnDefinition x:Name="eigthColumn" MinWidth="100" Width="*"/>
-                <ColumnDefinition x:Name="nineColumn" MinWidth="100" Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <StackPanel x:Name="num" Grid.Row="1" Grid.Column="0"/>
-            <StackPanel x:Name="brand" Grid.Row="1" Grid.Column="1"></StackPanel>
-            <StackPanel x:Name="typeName" Grid.Row="1" Grid.Column="2"></StackPanel>
-            <StackPanel x:Name="serial" Grid.Row="1" Grid.Column="3"></StackPanel>
-            <StackPanel x:Name="analog" Grid.Row="1" Grid.Column="4"></StackPanel>
-            <StackPanel x:Name="count" Grid.Row="1" Grid.Column="5"></StackPanel>
-            <StackPanel x:Name="buy" Grid.Row="1" Grid.Column="6"></StackPanel>
-            <StackPanel x:Name="sell" Grid.Row="1" Grid.Column="7"></StackPanel>
-            <StackPanel x:Name="commOne" Grid.Row="1" Grid.Column="8"></StackPanel>
-            <StackPanel x:Name="commTwo" Grid.Row="1" Grid.Column="9"></StackPanel>
-
-            <Button Grid.Row="0" Grid.Column="0" Content="N" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,0,2,0" Click="TextBox_TextChanged"/>
-            <Button Grid.Row="0" Grid.Column="1" Content="Бренд" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,0,2,0"/>
-            <Button Grid.Row="0" Grid.Column="2" Content="Класс" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,0,2,0"/>
-            <Button Grid.Row="0" Grid.Column="3" Content="Сер.N" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,0,2,0"/>
-            <Button Grid.Row="0" Grid.Column="4" Content="Ан.N" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,0,2,0"/>
-            <Button Grid.Row="0" Grid.Column="5" Content="Кол-во" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,0,2,0"/>
-            <Button Grid.Row="0" Grid.Column="6" Content="Покупка" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,0,2,0"/>
-            <Button Grid.Row="0" Grid.Column="7" Content="Продажа" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,0,2,0"/>
-            <Button Grid.Row="0" Grid.Column="8" Content="Ком.1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,0,2,0"/>
-            <Button Grid.Row="0" Grid.Column="9" Content="Ком.2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,0,2,0"/>
-        </Grid>-->
-
-
-
-
-                    <AppBar x:Name="appBarSP" Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                    <Grid x:Name="storageTableTwo" Grid.Row="1" Grid.Column="1" Background="Azure" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition x:Name="zeroColumn" Width="40"/>
+                            <ColumnDefinition x:Name="oneColumn" MinWidth="70" Width="*"/>
+                            <ColumnDefinition x:Name="twoColumn" MinWidth="70" Width="*"/>
+                            <ColumnDefinition x:Name="threeColumn" MinWidth="70" Width="*"/>
+                            <ColumnDefinition x:Name="fourthColumn" MinWidth="70" Width="*"/>
+                            <ColumnDefinition x:Name="fiveColumn" MinWidth="70" Width="*"/>
+                            <ColumnDefinition x:Name="sixColumn" MinWidth="80" Width="*"/>
+                            <ColumnDefinition x:Name="sevenColumn" MinWidth="80" Width="*"/>
+                            <ColumnDefinition x:Name="eigthColumn" MinWidth="100" Width="*"/>
+                            <ColumnDefinition x:Name="nineColumn" MinWidth="100" Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Row="0" Grid.Column="0" Content="N" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,0,2,0"/>
+                        <Button Grid.Row="0" Grid.Column="1" Content="Бренд" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,0,2,0"/>
+                        <Button Grid.Row="0" Grid.Column="2" Content="Класс" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,0,2,0"/>
+                        <Button Grid.Row="0" Grid.Column="3" Content="Сер.N" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,0,2,0"/>
+                        <Button Grid.Row="0" Grid.Column="4" Content="Ан.N" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,0,2,0"/>
+                        <Button Grid.Row="0" Grid.Column="5" Content="Кол-во" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,0,2,0"/>
+                        <Button Grid.Row="0" Grid.Column="6" Content="Покупка" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,0,2,0"/>
+                        <Button Grid.Row="0" Grid.Column="7" Content="Продажа" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,0,2,0"/>
+                        <Button Grid.Row="0" Grid.Column="8" Content="Ком.1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,0,2,0"/>
+                        <Button Grid.Row="0" Grid.Column="9" Content="Ком.2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,0,2,0"/>
+                    </Grid>
+                    
+                    <AppBar x:Name="appBarSP" Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="Transparent" Width="400">
                         <Grid >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="10"/>
@@ -170,31 +154,31 @@
                     <!--ИМЯ-->
                     <TextBlock Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Наименование" TextAlignment="Left" Width="180"/>
                     <TextBox x:Name="nameObjectField"  Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="" PlaceholderText="Наименование запчасти" TextAlignment="Right" Width="180"/>
-                    
+
                     <!--НОМЕР ОРИГИНАЛА-->
                     <TextBlock Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Номер оригинала" TextAlignment="Left" Width="180"/>
                     <TextBox x:Name="onNumField"   Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" PlaceholderText="Артикул" TextAlignment="Right" Width="180"/>
-                    
+
                     <!--НОМЕР АНАЛОГА-->
                     <TextBlock Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Номер аналога" TextAlignment="Left" Width="180"/>
                     <TextBox x:Name="anNumField"  Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" PlaceholderText="Артикул" TextAlignment="Right" Width="180"/>
-                    
+
                     <!--КОЛИЧЕСТВО-->
                     <TextBlock Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Количество" TextAlignment="Left" Width="180"/>
                     <TextBox x:Name="countObjectField"  Grid.Row="5" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" PlaceholderText="Количество" TextAlignment="Right" Width="180"/>
-                    
+
                     <!--ЦЕНА ПОКУПКИ-->
                     <TextBlock Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Цена за Ед.(Покупка)" TextAlignment="Left" Width="180"/>
                     <TextBox x:Name="buy"  Grid.Row="6" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" PlaceholderText="Цена за Ед." TextAlignment="Right" Width="180"/>
-                    
+
                     <!--ЦЕНА ПРОДАЖИ-->
                     <TextBlock Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Цена за Ед.(Продажа)" TextAlignment="Left" Width="180"/>
                     <TextBox x:Name="sellField"   Grid.Row="7" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" PlaceholderText="Цена за Ед." TextAlignment="Right" Width="180"/>
-                    
+
                     <!--ПЕРВЫЙ КОММЕНТАРИЙ-->
                     <TextBlock Grid.Row="8" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Комментарий 1" TextAlignment="Left" Width="180"/>
                     <TextBox x:Name="fcField"   Grid.Row="8" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="" PlaceholderText="Текст комментария" TextAlignment="Right" Width="180"/>
-                     
+
                     <!--ВТОРОЙ КОММЕНТАРИЙ-->
                     <TextBlock Grid.Row="9" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Комментарий 2" TextAlignment="Left" Width="180"/>
                     <TextBox x:Name="scField"   Grid.Row="9" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="" PlaceholderText="Текст комментария" TextAlignment="Right" Width="180"/>

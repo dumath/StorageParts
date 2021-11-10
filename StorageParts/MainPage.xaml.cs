@@ -38,6 +38,7 @@ namespace StorageParts
             this.InitializeComponent();
             this.activeWindow = storageWindow;
             this.parts = new List<Part>();
+            
         }
         #endregion
 
@@ -313,13 +314,20 @@ namespace StorageParts
             }
         }
 
-        
+        private void putData(string s, RowDefinition rowDefinition, ColumnDefinition columnDefinition)
+        {
+            TextBlock textBlock = new TextBlock() { Text = s, TextAlignment = TextAlignment.Center, VerticalAlignment = VerticalAlignment.Stretch, HorizontalAlignment = HorizontalAlignment.Stretch };
+            storageTableTwo.Children.Add(textBlock);
+            Grid.SetRow(textBlock, storageTableTwo.RowDefinitions.IndexOf(rowDefinition));
+            Grid.SetColumn(textBlock, storageTableTwo.ColumnDefinitions.IndexOf(columnDefinition));
+        }
 
         //Метод добавления объекта в сетку.
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+                //Считываем данные, введеные пользователем.
                 int count = int.Parse(countObjectField.Text);
                 decimal bp = decimal.Parse(buy.Text);
                 decimal sp = decimal.Parse(sellField.Text);
@@ -335,9 +343,20 @@ namespace StorageParts
                     SecondComment = scField.Text
                 };
                 parts.Add(p);
-                storageTable.Items.Add(p.ToString());
 
-
+                RowDefinition rowDefinition = new RowDefinition() { Height = new GridLength(20) };
+                storageTableTwo.RowDefinitions.Add(rowDefinition);
+                this.putData(Part.Number.ToString(), rowDefinition, zeroColumn);
+                this.putData(p.Brand, rowDefinition, oneColumn);
+                this.putData(p.Name, rowDefinition, twoColumn);
+                this.putData(p.OriginalNumber, rowDefinition, threeColumn);
+                this.putData(p.AnalogNumber, rowDefinition, fourthColumn);
+                this.putData(p.Count.ToString(), rowDefinition, fiveColumn);
+                this.putData(p.BuyPrice.ToString(), rowDefinition, sixColumn);
+                this.putData(p.SellPrice.ToString(), rowDefinition, sevenColumn);
+                this.putData(p.FirstComment, rowDefinition, eigthColumn);
+                this.putData(p.SecondComment, rowDefinition, nineColumn);
+                //storageTable.Items.Add(p.ToString()); отключаем тестовую разметку.
                 this.ReturnToMainWindow(null, null);
             }
             catch (Exception ex)
