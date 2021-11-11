@@ -27,7 +27,7 @@ namespace StorageParts
     /// </summary>
     public sealed partial class MainPage : Page
     {
-
+        #region Fields
         private Grid activeWindow; //Переменная, отслеживающая активное окно.
 
         //TODO:parts в viewModel. Если будет подключаться облако.
@@ -36,6 +36,7 @@ namespace StorageParts
         List<string> strings; //Коллекция, для инициализации класса Part.//Тестовое.
 
         List<ListBoxItem> listBoxItems; //Коллекция выделения строки.
+        #endregion
 
         #region Constructors
         public MainPage()
@@ -150,7 +151,7 @@ namespace StorageParts
         #endregion
 
         #region Methods Open/Close/Save
-        //Создать файл. TODO: Test
+        //TODO: Переписать алгоритм.
         private async void createFile_Click(object sender, RoutedEventArgs e)
         {
             if (storageTable.Items.Count != 0)
@@ -184,7 +185,7 @@ namespace StorageParts
             return;
         }
 
-        //Открыть файл. Полностью готов.
+        //TODO: Переписать алгоритм.
         private async void selectFile_Click(object sender, RoutedEventArgs e)
         {
             FileOpenPicker fileOpenPicker = new FileOpenPicker();
@@ -220,7 +221,7 @@ namespace StorageParts
             }
         }
 
-        //Сохранить как файл.Test
+        //TODO: переписать алгоритм.
         private async void saveAsFile_Click(object sender, TappedRoutedEventArgs e)
         {
             try
@@ -253,7 +254,7 @@ namespace StorageParts
         }
 
         //Сохранить файл.
-        //TODO:Добавить сохранение без вывода окна открытого файла
+        //TODO: Переписать алгоритм
         private async void saveFile_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -288,7 +289,7 @@ namespace StorageParts
             }
         }
 
-        //Дополнительный метод сохранения.TODO: Тест, заменить.
+        //TODO: Переписать алгоритм.
         private async System.Threading.Tasks.Task<bool> saveFile()
         {
             try
