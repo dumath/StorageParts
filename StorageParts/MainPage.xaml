@@ -13,7 +13,7 @@
 
     <Grid x:Name="VVV">
         <SplitView x:Name="fullScreenView" IsPaneOpen="False" PanePlacement="Left" DisplayMode="CompactOverlay" OpenPaneLength="180" CompactPaneLength="50" PaneBackground="Azure">
-            <!--Панель слева-->
+            <!--Панель слева.-->
             <SplitView.Pane>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -26,6 +26,7 @@
                         <ColumnDefinition Width="10*"/>
                         <ColumnDefinition Width="0"/>
                     </Grid.ColumnDefinitions>
+                    <!--Контейнер кнопок слева.-->
                     <ListBox x:Name="leftPanelButtons" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Background="Azure" PointerEntered="OpenPane" PointerExited="ClosePane">
                         <ListBoxItem Tapped="createFile_Click">
                             <StackPanel x:Name="create" Orientation="Horizontal" Margin="6,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left">
@@ -55,14 +56,14 @@
                 </Grid>
             </SplitView.Pane>
 
-            <!--Панель справа-->
+            <!--Панель справа.-->
             <Grid x:Name="views" Visibility="Visible">
-                <!--Главное окно-->
+                <!--Главное окно.-->
                 <Grid x:Name="storageWindow" Visibility="Visible">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="10"/>
                         <RowDefinition Height="10*"/>
-                        <RowDefinition Height="70"/>
+                        <RowDefinition MinHeight="70" MaxHeight="80" Height="*"/>
                         <RowDefinition Height="10"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
@@ -70,41 +71,58 @@
                         <ColumnDefinition Width="10*"/>
                         <ColumnDefinition Width="10"/>
                     </Grid.ColumnDefinitions>
+                    
+                    <!--Тестовый контейнер.-->
                     <ListBox x:Name="storageTable" Grid.Row="1" Grid.Column="1" Visibility="Collapsed"  ScrollViewer.HorizontalScrollMode="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
 
                     </ListBox>
-                    
 
-                    <Grid x:Name="storageTableTwo" Grid.Row="1" Grid.Column="1" Background="Azure" >
+                    <!--Действующая сетка. Отображение данных.-->
+                    <Grid Grid.Row="1" Grid.Column="1" x:Name="storageTableTwo" Margin="20">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="40"/>
+                            <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition x:Name="zeroColumn" Width="40"/>
-                            <ColumnDefinition x:Name="oneColumn" MinWidth="70" Width="*"/>
-                            <ColumnDefinition x:Name="twoColumn" MinWidth="70" Width="*"/>
-                            <ColumnDefinition x:Name="threeColumn" MinWidth="70" Width="*"/>
-                            <ColumnDefinition x:Name="fourthColumn" MinWidth="70" Width="*"/>
-                            <ColumnDefinition x:Name="fiveColumn" MinWidth="70" Width="*"/>
-                            <ColumnDefinition x:Name="sixColumn" MinWidth="80" Width="*"/>
-                            <ColumnDefinition x:Name="sevenColumn" MinWidth="80" Width="*"/>
-                            <ColumnDefinition x:Name="eigthColumn" MinWidth="100" Width="*"/>
-                            <ColumnDefinition x:Name="nineColumn" MinWidth="100" Width="*"/>
+                            <ColumnDefinition MinWidth="40" Width="40"/>
+                            <ColumnDefinition MinWidth="60" Width="*"/>
+                            <ColumnDefinition MinWidth="60" Width="*"/>
+                            <ColumnDefinition MinWidth="60" Width="*"/>
+                            <ColumnDefinition MinWidth="60" Width="*"/>
+                            <ColumnDefinition MinWidth="60" Width="*"/>
+                            <ColumnDefinition MinWidth="80" Width="*"/>
+                            <ColumnDefinition MinWidth="80" Width="*"/>
+                            <ColumnDefinition MinWidth="60" Width="*"/>
+                            <ColumnDefinition MinWidth="60" Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Row="0" Grid.Column="0" Content="N" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,0,2,0"/>
-                        <Button Grid.Row="0" Grid.Column="1" Content="Бренд" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,0,2,0"/>
-                        <Button Grid.Row="0" Grid.Column="2" Content="Класс" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,0,2,0"/>
-                        <Button Grid.Row="0" Grid.Column="3" Content="Сер.N" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,0,2,0"/>
-                        <Button Grid.Row="0" Grid.Column="4" Content="Ан.N" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,0,2,0"/>
-                        <Button Grid.Row="0" Grid.Column="5" Content="Кол-во" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,0,2,0"/>
-                        <Button Grid.Row="0" Grid.Column="6" Content="Покупка" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,0,2,0"/>
-                        <Button Grid.Row="0" Grid.Column="7" Content="Продажа" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,0,2,0"/>
-                        <Button Grid.Row="0" Grid.Column="8" Content="Ком.1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,0,2,0"/>
-                        <Button Grid.Row="0" Grid.Column="9" Content="Ком.2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,0,2,0"/>
+                        <Button Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="№" Margin="1,0,1,0" Background="White"/>
+                        <Button Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Бренд" Margin="1,0,1,0" Background="White"/>
+                        <Button Grid.Row="0" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Класс" Margin="1,0,1,0" Background="White"/>
+                        <Button Grid.Row="0" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Сер.№" Margin="1,0,1,0" Background="White"/>
+                        <Button Grid.Row="0" Grid.Column="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Ан.№" Margin="1,0,1,0" Background="White"/>
+                        <Button Grid.Row="0" Grid.Column="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Кол-во" Margin="1,0,1,0" Background="White"/>
+                        <Button Grid.Row="0" Grid.Column="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Покупка" Margin="1,0,1,0" Background="White"/>
+                        <Button Grid.Row="0" Grid.Column="7" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Продажа" Margin="1,0,1,0" Background="White"/>
+                        <Button Grid.Row="0" Grid.Column="8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Комм.1" Margin="1,0,1,0" Background="White"/>
+                        <Button Grid.Row="0" Grid.Column="9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Комм.2" Margin="1,0,1,0" Background="White"/>
+                        <StackPanel x:Name="numColumn" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFF0E6E6"/>
+                        <StackPanel x:Name="brandColumn" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFF0E6E6"/>
+                        <StackPanel x:Name="nameColumn" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFF0E6E6"/>
+                        <StackPanel x:Name="originalColumn" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFF0E6E6"/>
+                        <StackPanel x:Name="analogColumn" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFF0E6E6"/>
+                        <StackPanel x:Name="countColumn" Grid.Row="1" Grid.Column="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFF0E6E6"/>
+                        <StackPanel x:Name="buyPriceColumn" Grid.Row="1" Grid.Column="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFF0E6E6"/>
+                        <StackPanel x:Name="sellPriceColumn" Grid.Row="1" Grid.Column="7" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFF0E6E6"/>
+                        <StackPanel x:Name="firstCommentColumn" Grid.Row="1" Grid.Column="8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFF0E6E6"/>
+                        <StackPanel x:Name="secondCommentColumn" Grid.Row="1" Grid.Column="9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFF0E6E6"/>
                     </Grid>
                     
-                    <AppBar x:Name="appBarSP" Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="Transparent" Width="400">
+                    <!--Нижний бар кнопок.-->
+                    <AppBar x:Name="appBarSP" Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,4,4" Background="Transparent" Width="400">
                         <Grid >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="60"/>
+                            </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="10"/>
                                 <ColumnDefinition Width="8*"/>
@@ -113,14 +131,15 @@
                                 <ColumnDefinition Width="100"/>
                                 <ColumnDefinition Width="10"/>
                             </Grid.ColumnDefinitions>
-                            <AppBarButton Grid.Column="2" Label="Добавить" Icon="Add"    VerticalAlignment="Center" HorizontalAlignment="Center" Click="Click_Add"/>
-                            <AppBarButton Grid.Column="3" Label="Изменить" Icon="Edit"   VerticalAlignment="Center" HorizontalAlignment="Center" Click="Click_Edit"/>
-                            <AppBarButton Grid.Column="4" Label="Удалить"  Icon="Delete" VerticalAlignment="Center" HorizontalAlignment="Center" Click="Click_Delete">
+                            <AppBarButton x:Name="addPartButton" Grid.Column="2" Label="Добавить" Icon="Add"    VerticalAlignment="Center" HorizontalAlignment="Center" Click="Click_Add"/>
+                            <AppBarButton x:Name="editPartButton" Grid.Column="3" Label="Изменить" Icon="Edit"   VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="False" Click="Click_Edit"/>
+                            <AppBarButton x:Name="deletePartButton" Grid.Column="4" Label="Удалить"  Icon="Delete" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="False" Click="Click_Delete">
                             </AppBarButton>
                         </Grid>
                     </AppBar>
                 </Grid>
 
+                <!--Сетка окна добавления объекта.-->
                 <Grid x:Name="addItemPage" Visibility="Collapsed">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="10"/>
@@ -148,12 +167,12 @@
                     </Grid.ColumnDefinitions>
                     <!--БРЕНД-->
                     <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Бренд" TextAlignment="Left" Width="180" />
-                    <TextBox x:Name="brandName"  Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="" PlaceholderText="Наименование бренда" TextAlignment="Right" Width="180"/>
+                    <TextBox x:Name="brandField"  Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="" PlaceholderText="Наименование бренда" TextAlignment="Right" Width="180"/>
                     <TextBlock Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" Text="" TextAlignment="Center"/>
 
                     <!--ИМЯ-->
                     <TextBlock Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Наименование" TextAlignment="Left" Width="180"/>
-                    <TextBox x:Name="nameObjectField"  Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="" PlaceholderText="Наименование запчасти" TextAlignment="Right" Width="180"/>
+                    <TextBox x:Name="nameField"  Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="" PlaceholderText="Наименование запчасти" TextAlignment="Right" Width="180"/>
 
                     <!--НОМЕР ОРИГИНАЛА-->
                     <TextBlock Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Номер оригинала" TextAlignment="Left" Width="180"/>
@@ -165,11 +184,11 @@
 
                     <!--КОЛИЧЕСТВО-->
                     <TextBlock Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Количество" TextAlignment="Left" Width="180"/>
-                    <TextBox x:Name="countObjectField"  Grid.Row="5" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" PlaceholderText="Количество" TextAlignment="Right" Width="180"/>
+                    <TextBox x:Name="countField"  Grid.Row="5" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" PlaceholderText="Количество" TextAlignment="Right" Width="180"/>
 
                     <!--ЦЕНА ПОКУПКИ-->
                     <TextBlock Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Цена за Ед.(Покупка)" TextAlignment="Left" Width="180"/>
-                    <TextBox x:Name="buy"  Grid.Row="6" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" PlaceholderText="Цена за Ед." TextAlignment="Right" Width="180"/>
+                    <TextBox x:Name="buyField"  Grid.Row="6" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" PlaceholderText="Цена за Ед." TextAlignment="Right" Width="180"/>
 
                     <!--ЦЕНА ПРОДАЖИ-->
                     <TextBlock Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Цена за Ед.(Продажа)" TextAlignment="Left" Width="180"/>

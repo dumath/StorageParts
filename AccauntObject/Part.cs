@@ -11,6 +11,7 @@ namespace AccauntObject
     {
         #region Fields
         //TODO:порядковый номер : для всех объектов(собственность класса)
+        private readonly int _id;
         private static int _number = 0;     //Общее количество созданных объектов.
         private string _brand;              //Бренд
         private string _name;               //Класс запчасти - наименование.
@@ -33,6 +34,7 @@ namespace AccauntObject
         public Part(string brand, string name, string originalNumber, string analogNumber, int count, decimal buyPrice, decimal sellPrice, string firstComment, string secondCcomment)
         {
             _number += 1;
+            this._id = _number;
             this._brand = brand;
             this._name = name;
             this._originalNumber = originalNumber;
@@ -90,17 +92,25 @@ namespace AccauntObject
             sc = sc.Substring(3);
             this._secondComment = sc;
             _number += 1;
+            this._id = _number;
         }
 
         //Активный конструктор: Для инициализации через инициализатор объекта.
         public Part(decimal buyPrice)
         {
             _number += 1;
+            this._id = _number;
             this._buyPrice = buyPrice;
         }
         #endregion
 
         #region Properties
+        //Идентификатор объекта
+        public int ID
+        {
+            get => this._id;
+        }
+
         //Количество созданных объектов.
         public static int Number
         {

@@ -29,21 +29,30 @@ namespace StorageParts
     {
 
         private Grid activeWindow; //Переменная, отслеживающая активное окно.
-        private List<Part> parts; //Список запчастей
-        List<string> strings; //Коллекция, для инициализации класса Part
+
+        //TODO:parts в viewModel. Если будет подключаться облако.
+        private List<Part> parts; //Список запчастей. Синхронизация с listBoxItems.
+
+        List<string> strings; //Коллекция, для инициализации класса Part.//Тестовое.
+
+        List<ListBoxItem> listBoxItems; //Коллекция выделения строки.
 
         #region Constructors
         public MainPage()
         {
             this.InitializeComponent();
-            this.activeWindow = storageWindow;
-            this.parts = new List<Part>();
-            
+            this.activeWindow = storageWindow; //Инициализируем стартовуя сетку.
+            this.parts = new List<Part>(); //Убираем null, для дальнейшей синхронизации.
+            this.listBoxItems = new List<ListBoxItem>(); //Убираем null, для дальнейшей синхронизации выбранного объекта.
         }
         #endregion
 
         #region AppBarButtons 
-        //Добавить новую позицию.
+        /// <summary>
+        /// Метод, выводящий форму сетки добавления объекта.
+        /// </summary>
+        /// <param name="sender">Не используется.</param>
+        /// <param name="e">Не используется.</param>
         private void Click_Add(object sender, RoutedEventArgs e)
         {
             //Меняем Grid
@@ -51,54 +60,79 @@ namespace StorageParts
             this.activeWindow = addItemPage;
             this.activeWindow.Visibility = Visibility.Visible;
             //Очищаем форму.
-            brandName.Text = String.Empty;
-            nameObjectField.Text = String.Empty;
+            brandField.Text = String.Empty;
+            nameField.Text = String.Empty;
             onNumField.Text = String.Empty;
             anNumField.Text = String.Empty;
-            countObjectField.Text = String.Empty;
-            buy.Text = String.Empty;
+            countField.Text = String.Empty;
+            buyField.Text = String.Empty;
             sellField.Text = String.Empty;
             fcField.Text = String.Empty;
             scField.Text = String.Empty;
         }
 
-        //Изменить позицию.
+        /// <summary>
+        /// Метод изменения данных объекта, выделенного в сетке StorageTable(PS:TWO)
+        /// </summary>
+        /// <param name="sender">Не используется.</param>
+        /// <param name="e">Не используется.</param>
         private void Click_Edit(object sender, RoutedEventArgs e)
         {
-            if (storageTable.SelectedIndex != -1)
+            if (listBoxItems.Count != 0)
             {
-                string s = storageTable.SelectedItem.ToString();
-                if (s != null)
-                {
-                    int p = parts.FindIndex(x => x.Equals(new Part(s)));
-                    activeWindow.Visibility = Visibility.Collapsed;
-                    activeWindow = addItemPage;
-                    activeWindow.Visibility = Visibility.Visible;
-                    buy.IsEnabled = false;
-                    brandName.Text = parts[p].Brand;
-                    nameObjectField.Text = parts[p].Name;
-                    onNumField.Text = parts[p].OriginalNumber;
-                    anNumField.Text = parts[p].AnalogNumber;
-                    countObjectField.Text = parts[p].Count.ToString();
-                    buy.Text = parts[p].BuyPrice.ToString();
-                    sellField.Text = parts[p].SellPrice.ToString();
-                    fcField.Text = parts[p].FirstComment;
-                    scField.Text = parts[p].SecondComment;
-                    addButton.Visibility = Visibility.Collapsed;
-                    changeButton.Visibility = Visibility.Visible;
-                }
+                activeWindow.Visibility = Visibility.Collapsed;
+                activeWindow = addItemPage;
+                activeWindow.Visibility = Visibility.Visible;
+                buyField.IsEnabled = false;
+                int id = Int32.Parse(listBoxItems[0].Content.ToString());
+                Part p = parts.Find(x => x.ID == id);
+                brandField.Text = p.Brand;
+                nameField.Text = p.Name;
+                onNumField.Text = p.OriginalNumber;
+                anNumField.Text = p.AnalogNumber;
+                countField.Text = p.Count.ToString();
+                buyField.Text = p.BuyPrice.ToString();
+                sellField.Text = p.SellPrice.ToString();
+                fcField.Text = p.FirstComment;
+                scField.Text = p.SecondComment;
+                addButton.Visibility = Visibility.Collapsed;
+                changeButton.Visibility = Visibility.Visible;
             }
         }
 
-        //Удалить позицию.
+        /// <summary>
+        /// Метод, удаляющий объект, выделенный в сетке StorageTable(PS:TWO)
+        /// </summary>
+        /// <param name="sender">Не используется.</param>
+        /// <param name="e">Не используется.</param>
         private void Click_Delete(object sender, RoutedEventArgs e)
         {
-            if (storageTable.SelectedIndex != -1)
+            MessageDialog message = new MessageDialog(numColumn.Children.IndexOf(listBoxItems[0]).ToString());
+            message.ShowAsync();
+            if (listBoxItems.Count != 0)
             {
-                string s = storageTable.SelectedItem.ToString();
-                int i = this.parts.FindIndex(x => x.Equals(new Part(s)));
-                this.parts.RemoveAt(i);
-                storageTable.Items.RemoveAt(storageTable.SelectedIndex);
+                //Ищем значение id, для поиска индекса в parts
+                int id = int.Parse(listBoxItems[0].Content.ToString());
+                Part part = this.parts.Find(x => x.ID == id);
+                
+                //Ищем индекс
+                int index = numColumn.Children.IndexOf(this.listBoxItems[0]);
+                //Очищаем таблицу
+                numColumn.Children.Remove(this.listBoxItems[0]);
+                brandColumn.Children.Remove(this.listBoxItems[1]);
+                nameColumn.Children.Remove(this.listBoxItems[2]);
+                originalColumn.Children.Remove(this.listBoxItems[3]);
+                analogColumn.Children.Remove(this.listBoxItems[4]);
+                countColumn.Children.Remove(this.listBoxItems[5]);
+                buyPriceColumn.Children.Remove(this.listBoxItems[6]);
+                sellPriceColumn.Children.Remove(this.listBoxItems[7]);
+                firstCommentColumn.Children.Remove(this.listBoxItems[8]);
+                secondCommentColumn.Children.Remove(this.listBoxItems[9]);
+                //Очищаем выделнную строку.
+                this.listBoxItems.Clear();
+                //Выключаем кнопки. Выделение снято.
+                editPartButton.IsEnabled = false;
+                deletePartButton.IsEnabled = false;
             }
         }
         #endregion
@@ -180,7 +214,7 @@ namespace StorageParts
                     }
                     ((IDisposable)fileStream).Dispose();
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageDialog msg = new MessageDialog(ex.Message);
                     msg.ShowAsync();
@@ -275,7 +309,7 @@ namespace StorageParts
                     }
                     await FileIO.WriteLinesAsync(newFile, strings);
                     strings.Clear();
-                    
+
                     return true;
                 }
                 return false;
@@ -314,12 +348,16 @@ namespace StorageParts
             }
         }
 
-        private void putData(string s, RowDefinition rowDefinition, ColumnDefinition columnDefinition)
+        /// <summary>
+        /// Метода добавления данных в сетку таблицы.
+        /// </summary>
+        /// <param name="s">Значение</param>
+        /// <param name="stackPanel">Столбец в таблице</param>
+        private void putData(string s, StackPanel stackPanel)
         {
-            TextBlock textBlock = new TextBlock() { Text = s, TextAlignment = TextAlignment.Center, VerticalAlignment = VerticalAlignment.Stretch, HorizontalAlignment = HorizontalAlignment.Stretch };
-            storageTableTwo.Children.Add(textBlock);
-            Grid.SetRow(textBlock, storageTableTwo.RowDefinitions.IndexOf(rowDefinition));
-            Grid.SetColumn(textBlock, storageTableTwo.ColumnDefinitions.IndexOf(columnDefinition));
+            ListBoxItem listBoxItem = new ListBoxItem() { Content = s, Style = (Style)Application.Current.Resources["stackElement"] };
+            listBoxItem.Tapped += Tap_To_Table;
+            stackPanel.Children.Add(listBoxItem);
         }
 
         //Метод добавления объекта в сетку.
@@ -328,13 +366,14 @@ namespace StorageParts
             try
             {
                 //Считываем данные, введеные пользователем.
-                int count = int.Parse(countObjectField.Text);
-                decimal bp = decimal.Parse(buy.Text);
+                int count = int.Parse(countField.Text);
+                decimal bp = decimal.Parse(buyField.Text);
                 decimal sp = decimal.Parse(sellField.Text);
+                //Создаем объект. Тут статическое поле увеличивается.(PS:Для теста).
                 Part p = new Part(bp)
                 {
-                    Brand = brandName.Text,
-                    Name = nameObjectField.Text,
+                    Brand = brandField.Text,
+                    Name = nameField.Text,
                     OriginalNumber = onNumField.Text,
                     AnalogNumber = anNumField.Text,
                     Count = count,
@@ -342,56 +381,89 @@ namespace StorageParts
                     FirstComment = fcField.Text,
                     SecondComment = scField.Text
                 };
+                //Добавляем в коллекцию для синхронизации.
                 parts.Add(p);
-
-                RowDefinition rowDefinition = new RowDefinition() { Height = new GridLength(20) };
-                storageTableTwo.RowDefinitions.Add(rowDefinition);
-                this.putData(Part.Number.ToString(), rowDefinition, zeroColumn);
-                this.putData(p.Brand, rowDefinition, oneColumn);
-                this.putData(p.Name, rowDefinition, twoColumn);
-                this.putData(p.OriginalNumber, rowDefinition, threeColumn);
-                this.putData(p.AnalogNumber, rowDefinition, fourthColumn);
-                this.putData(p.Count.ToString(), rowDefinition, fiveColumn);
-                this.putData(p.BuyPrice.ToString(), rowDefinition, sixColumn);
-                this.putData(p.SellPrice.ToString(), rowDefinition, sevenColumn);
-                this.putData(p.FirstComment, rowDefinition, eigthColumn);
-                this.putData(p.SecondComment, rowDefinition, nineColumn);
-                //storageTable.Items.Add(p.ToString()); отключаем тестовую разметку.
+                //Заполняем таблицу.
+                this.putData(p.ID.ToString(), numColumn);
+                this.putData(p.Brand, brandColumn);
+                this.putData(p.Name, nameColumn);
+                this.putData(p.OriginalNumber, originalColumn);
+                this.putData(p.AnalogNumber, analogColumn);
+                this.putData(p.Count.ToString(), countColumn);
+                this.putData(p.BuyPrice.ToString(), buyPriceColumn);
+                this.putData(p.SellPrice.ToString(), sellPriceColumn);
+                this.putData(p.FirstComment, firstCommentColumn);
+                this.putData(p.SecondComment, secondCommentColumn);
+                //Возвращаемся на сетку StorageTable(PS:TWO)
                 this.ReturnToMainWindow(null, null);
             }
             catch (Exception ex)
             {
-                MessageDialog msg = new MessageDialog(ex.Message);
+                MessageDialog msg = new MessageDialog(ex.Message, ex.Source);
                 msg.ShowAsync();
             }
-
-
         }
 
         //Метод изменения объекта в сетке.
         private void Change_CLick(object sender, RoutedEventArgs e)
         {
-            string s = storageTable.SelectedItem.ToString();
-            int iST = storageTable.SelectedIndex;
-            storageTable.Items.RemoveAt(iST);
-            int i = parts.FindIndex(x => x.Equals(new Part(s)));
-            int c = Int32.Parse(countObjectField.Text);
-            decimal sp = decimal.Parse(sellField.Text);
-            parts[i].Brand = brandName.Text;
-            parts[i].Name = nameObjectField.Text;
-            parts[i].OriginalNumber = onNumField.Text;
-            parts[i].AnalogNumber = anNumField.Text;
-            parts[i].Count = c;
-            parts[i].SellPrice = sp;
-            parts[i].FirstComment = fcField.Text;
-            parts[i].SecondComment = scField.Text;
-            storageTable.Items.Insert(iST, parts[i].ToString());
+            //Убираем тестовую коллекцию
+            //string s = storageTable.SelectedItem.ToString();
+            //int iST = storageTable.SelectedIndex;
+            //storageTable.Items.RemoveAt(iST);
+
+            //int i = parts.FindIndex(x => x.Equals(new Part(s)));
+            //int c = Int32.Parse(countObjectField.Text);
+            //decimal sp = decimal.Parse(sellField.Text);
+            //parts[i].Brand = brandName.Text;
+            //parts[i].Name = nameObjectField.Text;
+            //parts[i].OriginalNumber = onNumField.Text;
+            //parts[i].AnalogNumber = anNumField.Text;
+            //parts[i].Count = c;
+            //parts[i].SellPrice = sp;
+            //parts[i].FirstComment = fcField.Text;
+            //parts[i].SecondComment = scField.Text;
+            //storageTable.Items.Insert(iST, parts[i].ToString());
             this.ReturnToMainWindow(null, null);
         }
+
+        /// <summary>
+        /// Метод выбора строки в таблице
+        /// </summary>
+        /// <param name="sender">Элемент, вызвавший событие.</param>
+        /// <param name="e">Не используется.</param>
+        private void Tap_To_Table(object sender, TappedRoutedEventArgs e)
+        {
+            ListBoxItem listBoxItem = sender as ListBoxItem;
+            if (listBoxItem == null)
+                return;
+            StackPanel stackPanel = listBoxItem.Parent as StackPanel;
+            if (stackPanel == null)
+                return;
+            int i = stackPanel.Children.IndexOf(listBoxItem);
+            if (listBoxItems.Count != 0)
+            {
+                foreach (ListBoxItem l in listBoxItems)
+                    l.Background = new SolidColorBrush(Windows.UI.Colors.Transparent);
+
+                listBoxItems.Clear();
+            }
+            listBoxItems.Add(numColumn.Children[i] as ListBoxItem);
+            listBoxItems.Add(brandColumn.Children[i] as ListBoxItem);
+            listBoxItems.Add(nameColumn.Children[i] as ListBoxItem);
+            listBoxItems.Add(originalColumn.Children[i] as ListBoxItem);
+            listBoxItems.Add(analogColumn.Children[i] as ListBoxItem);
+            listBoxItems.Add(countColumn.Children[i] as ListBoxItem);
+            listBoxItems.Add(buyPriceColumn.Children[i] as ListBoxItem);
+            listBoxItems.Add(sellPriceColumn.Children[i] as ListBoxItem);
+            listBoxItems.Add(firstCommentColumn.Children[i] as ListBoxItem);
+            listBoxItems.Add(secondCommentColumn.Children[i] as ListBoxItem);
+            foreach (ListBoxItem l in listBoxItems)
+                l.Background = new SolidColorBrush(Windows.UI.Colors.Beige);
+            //Включаем кнопки.Таблица не пуста.
+            editPartButton.IsEnabled = true;
+            deletePartButton.IsEnabled = true;
+        }
         #endregion
-
-
-
     }
-
 }
