@@ -107,14 +107,11 @@ namespace StorageParts
         /// <param name="e">Не используется.</param>
         private void Click_Delete(object sender, RoutedEventArgs e)
         {
-            MessageDialog message = new MessageDialog(numColumn.Children.IndexOf(listBoxItems[0]).ToString());
-            message.ShowAsync();
             if (listBoxItems.Count != 0)
             {
                 //Ищем значение id, для поиска индекса в parts
                 int id = int.Parse(listBoxItems[0].Content.ToString());
                 Part part = this.parts.Find(x => x.ID == id);
-                
                 //Ищем индекс
                 int index = numColumn.Children.IndexOf(this.listBoxItems[0]);
                 //Очищаем таблицу
@@ -130,6 +127,7 @@ namespace StorageParts
                 secondCommentColumn.Children.Remove(this.listBoxItems[9]);
                 //Очищаем выделнную строку.
                 this.listBoxItems.Clear();
+                this.parts.Remove(part);
                 //Выключаем кнопки. Выделение снято.
                 editPartButton.IsEnabled = false;
                 deletePartButton.IsEnabled = false;
@@ -360,7 +358,11 @@ namespace StorageParts
             stackPanel.Children.Add(listBoxItem);
         }
 
-        //Метод добавления объекта в сетку.
+        /// <summary>
+        /// Метод сохранения объекта из сетки описания свойств запчасти.
+        /// </summary>
+        /// <param name="sender">Не используется.</param>
+        /// <param name="e">Не используется.</param>
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -394,6 +396,7 @@ namespace StorageParts
                 this.putData(p.SellPrice.ToString(), sellPriceColumn);
                 this.putData(p.FirstComment, firstCommentColumn);
                 this.putData(p.SecondComment, secondCommentColumn);
+
                 //Возвращаемся на сетку StorageTable(PS:TWO)
                 this.ReturnToMainWindow(null, null);
             }
@@ -404,27 +407,39 @@ namespace StorageParts
             }
         }
 
-        //Метод изменения объекта в сетке.
+        /// <summary>
+        /// Метод изменения объекта в сетке StorageTable(PS:Two0.
+        /// </summary>
+        /// <param name="sender">Не исользуется.</param>
+        /// <param name="e">Не используется.</param>
         private void Change_CLick(object sender, RoutedEventArgs e)
         {
-            //Убираем тестовую коллекцию
-            //string s = storageTable.SelectedItem.ToString();
-            //int iST = storageTable.SelectedIndex;
-            //storageTable.Items.RemoveAt(iST);
-
-            //int i = parts.FindIndex(x => x.Equals(new Part(s)));
-            //int c = Int32.Parse(countObjectField.Text);
-            //decimal sp = decimal.Parse(sellField.Text);
-            //parts[i].Brand = brandName.Text;
-            //parts[i].Name = nameObjectField.Text;
-            //parts[i].OriginalNumber = onNumField.Text;
-            //parts[i].AnalogNumber = anNumField.Text;
-            //parts[i].Count = c;
-            //parts[i].SellPrice = sp;
-            //parts[i].FirstComment = fcField.Text;
-            //parts[i].SecondComment = scField.Text;
-            //storageTable.Items.Insert(iST, parts[i].ToString());
-            this.ReturnToMainWindow(null, null);
+            int id = Int32.Parse(listBoxItems[0].Content.ToString());
+            Part p = this.parts.Find(x => x.ID == id);
+            //Обновляем значение в коллекции синхронизации.
+            p.Brand = brandField.Text;
+            p.Name = nameField.Text;
+            p.OriginalNumber = onNumField.Text;
+            p.AnalogNumber = anNumField.Text;
+            p.Count = Int32.Parse(countField.Text);
+            p.SellPrice = decimal.Parse(sellField.Text);
+            p.FirstComment = fcField.Text;
+            p.SecondComment = scField.Text;
+            //Обновляем значение в списке выбранных данных.
+            listBoxItems[1].Content = p.Brand;
+            listBoxItems[2].Content = p.Name;
+            listBoxItems[3].Content = p.OriginalNumber;
+            listBoxItems[4].Content = p.AnalogNumber;
+            listBoxItems[5].Content = p.Count.ToString();
+            listBoxItems[7].Content = p.SellPrice.ToString();
+            listBoxItems[8].Content = p.FirstComment;
+            listBoxItems[9].Content = p.SecondComment;
+            //Меняем кнопки. Кнопка "Сохранить" включена с инициализации.
+            changeButton.Visibility = Visibility.Collapsed;
+            addButton.Visibility = Visibility.Visible;
+            //Поле только для чтения, для добавления. Включено с инициализации.
+            buyField.IsEnabled = true;
+            this.ReturnToMainWindow(null, null); //Возвращаемся на сетку таблицы.
         }
 
         /// <summary>
