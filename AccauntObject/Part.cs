@@ -13,6 +13,7 @@ namespace AccauntObject
         //TODO:порядковый номер : для всех объектов(собственность класса)
         private readonly int _id;
         private static int _number = 0;     //Общее количество созданных объектов.
+        private static int _numberDeleted;  //ЧИсло удаленных объектов.
         private string _brand;              //Бренд
         private string _name;               //Класс запчасти - наименование.
         private string _originalNumber;     //Номер по оригиналу 
@@ -49,7 +50,12 @@ namespace AccauntObject
         //Активный конструктор: Для инициализации объекта из базы данных.
         public Part(string stringDb)
         {
-            string brand = stringDb.Substring(stringDb.IndexOf("Brand:"), stringDb.IndexOf("; Name"));
+            string num = stringDb.Substring(stringDb.IndexOf("Num:"), stringDb.IndexOf("; Brand:"));
+            num = num.Substring(5);
+            this._id = Int32.Parse(num);
+            
+            string brand = stringDb.Substring(stringDb.IndexOf("Brand:"));
+            brand = brand.Substring(stringDb.IndexOf("Brand:"), stringDb.IndexOf("; Name"));
             brand = brand.Substring(6);
             this._brand = brand;
 
@@ -91,6 +97,8 @@ namespace AccauntObject
             string sc = stringDb.Substring(stringDb.IndexOf("SC:"));
             sc = sc.Substring(3);
             this._secondComment = sc;
+
+            //TODO:Исправить логику.
             _number += 1;
             this._id = _number;
         }
@@ -209,9 +217,10 @@ namespace AccauntObject
         //TODO: StringBuilder??
         public override string ToString()
         {
-            return $"Brand:{this._brand}; Name:{this._name}; ON:{this._originalNumber}; AN:{this._analogNumber}; Count:{this._count}; BuyPrice:{this._buyPrice}; SellPrice:{this._sellPrice}; FC:{this._firstComment}; SC:{this._secondComment}";
+            return $"Num:{this._id}; Brand:{this._brand}; Name:{this._name}; ON:{this._originalNumber}; AN:{this._analogNumber}; Count:{this._count}; BuyPrice:{this._buyPrice}; SellPrice:{this._sellPrice}; FC:{this._firstComment}; SC:{this._secondComment}";
         }
 
+        //TODO: Отпадает??
         //TODO: Реализовать сравнение Hash
         //Метод сравнения двух Part объектов.
         public override bool Equals(object obj)

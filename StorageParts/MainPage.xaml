@@ -95,26 +95,96 @@
                             <ColumnDefinition MinWidth="60" Width="*"/>
                             <ColumnDefinition MinWidth="60" Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="№" Margin="1,0,1,0" Background="White"/>
-                        <Button Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Бренд" Margin="1,0,1,0" Background="White"/>
-                        <Button Grid.Row="0" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Класс" Margin="1,0,1,0" Background="White"/>
-                        <Button Grid.Row="0" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Сер.№" Margin="1,0,1,0" Background="White"/>
-                        <Button Grid.Row="0" Grid.Column="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Ан.№" Margin="1,0,1,0" Background="White"/>
-                        <Button Grid.Row="0" Grid.Column="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Кол-во" Margin="1,0,1,0" Background="White"/>
-                        <Button Grid.Row="0" Grid.Column="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Покупка" Margin="1,0,1,0" Background="White"/>
-                        <Button Grid.Row="0" Grid.Column="7" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Продажа" Margin="1,0,1,0" Background="White"/>
-                        <Button Grid.Row="0" Grid.Column="8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Комм.1" Margin="1,0,1,0" Background="White"/>
-                        <Button Grid.Row="0" Grid.Column="9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Комм.2" Margin="1,0,1,0" Background="White"/>
-                        <StackPanel x:Name="numColumn" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFF0E6E6"/>
-                        <StackPanel x:Name="brandColumn" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFF0E6E6"/>
-                        <StackPanel x:Name="nameColumn" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFF0E6E6"/>
-                        <StackPanel x:Name="originalColumn" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFF0E6E6"/>
-                        <StackPanel x:Name="analogColumn" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFF0E6E6"/>
-                        <StackPanel x:Name="countColumn" Grid.Row="1" Grid.Column="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFF0E6E6"/>
-                        <StackPanel x:Name="buyPriceColumn" Grid.Row="1" Grid.Column="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFF0E6E6"/>
-                        <StackPanel x:Name="sellPriceColumn" Grid.Row="1" Grid.Column="7" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFF0E6E6"/>
-                        <StackPanel x:Name="firstCommentColumn" Grid.Row="1" Grid.Column="8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFF0E6E6"/>
-                        <StackPanel x:Name="secondCommentColumn" Grid.Row="1" Grid.Column="9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFF0E6E6"/>
+                        <Button Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="№" Margin="1,0,1,0">
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FFF3EFE8"/>
+                                    <GradientStop Color="#FFDCDCD4" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Бренд" Margin="1,0,1,0" >
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FFF3EFE8"/>
+                                    <GradientStop Color="#FFDCDCD4" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Класс" Margin="1,0,1,0">
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FFF3EFE8"/>
+                                    <GradientStop Color="#FFDCDCD4" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Сер.№" Margin="1,0,1,0">
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FFF3EFE8"/>
+                                    <GradientStop Color="#FFDCDCD4" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Ан.№" Margin="1,0,1,0">
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FFF3EFE8"/>
+                                    <GradientStop Color="#FFDCDCD4" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Кол-во" Margin="1,0,1,0">
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FFF3EFE8"/>
+                                    <GradientStop Color="#FFDCDCD4" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Покупка" Margin="1,0,1,0">
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FFF3EFE8"/>
+                                    <GradientStop Color="#FFDCDCD4" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="7" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Продажа" Margin="1,0,1,0">
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FFF3EFE8"/>
+                                    <GradientStop Color="#FFDCDCD4" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Комм.1" Margin="1,0,1,0">
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FFF3EFE8"/>
+                                    <GradientStop Color="#FFDCDCD4" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Комм.2" Margin="1,0,1,0">
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FFF3EFE8"/>
+                                    <GradientStop Color="#FFDCDCD4" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+                        <StackPanel x:Name="numColumn" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White"/>
+                        <StackPanel x:Name="brandColumn" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White"/>
+                        <StackPanel x:Name="nameColumn" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White"/>
+                        <StackPanel x:Name="originalColumn" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White"/>
+                        <StackPanel x:Name="analogColumn" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White"/>
+                        <StackPanel x:Name="countColumn" Grid.Row="1" Grid.Column="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White"/>
+                        <StackPanel x:Name="buyPriceColumn" Grid.Row="1" Grid.Column="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White"/>
+                        <StackPanel x:Name="sellPriceColumn" Grid.Row="1" Grid.Column="7" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White"/>
+                        <StackPanel x:Name="firstCommentColumn" Grid.Row="1" Grid.Column="8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White"/>
+                        <StackPanel x:Name="secondCommentColumn" Grid.Row="1" Grid.Column="9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White"/>
                     </Grid>
                     
                     <!--Нижний бар кнопок.-->

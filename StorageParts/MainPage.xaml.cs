@@ -151,10 +151,10 @@ namespace StorageParts
         #endregion
 
         #region Methods Open/Close/Save
-        //TODO: Переписать алгоритм.
+        //TODO: Нужен тест
         private async void createFile_Click(object sender, RoutedEventArgs e)
         {
-            if (storageTable.Items.Count != 0)
+            if (storageTableTwo.Children.Count != 0)
             {
                 ContentDialog contentDialog = new ContentDialog();
                 contentDialog.Title = "Создание нового файла";
@@ -168,13 +168,31 @@ namespace StorageParts
                     if (await saveFile())
                     {
                         this.parts.Clear();
-                        storageTable.Items.Clear();
+                        numColumn.Children.Clear();
+                        brandColumn.Children.Clear();
+                        nameColumn.Children.Clear();
+                        originalColumn.Children.Clear();
+                        analogColumn.Children.Clear();
+                        countColumn.Children.Clear();
+                        buyPriceColumn.Children.Clear();
+                        sellPriceColumn.Children.Clear();
+                        firstCommentColumn.Children.Clear();
+                        secondCommentColumn.Children.Clear();
                     }
                 }
                 else if (result == ContentDialogResult.Secondary)
                 {
                     this.parts.Clear();
-                    storageTable.Items.Clear();
+                    numColumn.Children.Clear();
+                    brandColumn.Children.Clear();
+                    nameColumn.Children.Clear();
+                    originalColumn.Children.Clear();
+                    analogColumn.Children.Clear();
+                    countColumn.Children.Clear();
+                    buyPriceColumn.Children.Clear();
+                    sellPriceColumn.Children.Clear();
+                    firstCommentColumn.Children.Clear();
+                    secondCommentColumn.Children.Clear();
                 }
                 else
                 {
@@ -185,7 +203,7 @@ namespace StorageParts
             return;
         }
 
-        //TODO: Переписать алгоритм.
+        //TODO: Нужен тест
         private async void selectFile_Click(object sender, RoutedEventArgs e)
         {
             FileOpenPicker fileOpenPicker = new FileOpenPicker();
@@ -198,7 +216,16 @@ namespace StorageParts
             {
                 try
                 {
-                    storageTable.Items.Clear();
+                    numColumn.Children.Clear();
+                    brandColumn.Children.Clear();
+                    nameColumn.Children.Clear();
+                    originalColumn.Children.Clear();
+                    analogColumn.Children.Clear();
+                    countColumn.Children.Clear();
+                    buyPriceColumn.Children.Clear();
+                    sellPriceColumn.Children.Clear();
+                    firstCommentColumn.Children.Clear();
+                    secondCommentColumn.Children.Clear();
                     var fileStream = await storageFile.OpenAsync(FileAccessMode.ReadWrite);
                     var inputStream = fileStream.GetInputStreamAt(0);
                     using (TextReader reader = new StreamReader(inputStream.AsStreamForRead()))
@@ -221,7 +248,7 @@ namespace StorageParts
             }
         }
 
-        //TODO: переписать алгоритм.
+        //TODO: Нужен тест
         private async void saveAsFile_Click(object sender, TappedRoutedEventArgs e)
         {
             try
@@ -254,7 +281,7 @@ namespace StorageParts
         }
 
         //Сохранить файл.
-        //TODO: Переписать алгоритм
+        //TODO: Нужен тест
         private async void saveFile_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -289,7 +316,7 @@ namespace StorageParts
             }
         }
 
-        //TODO: Переписать алгоритм.
+        //TODO: Нужен тест
         private async System.Threading.Tasks.Task<bool> saveFile()
         {
             try
@@ -308,7 +335,6 @@ namespace StorageParts
                     }
                     await FileIO.WriteLinesAsync(newFile, strings);
                     strings.Clear();
-
                     return true;
                 }
                 return false;
@@ -322,7 +348,7 @@ namespace StorageParts
         }
         #endregion
 
-        #region Other Methods. Для упрощения кода.
+        #region Other Methods.
         //Мето возвращения на сетку главного окна.
         private void ReturnToMainWindow(object sender, RoutedEventArgs e)
         {
@@ -333,6 +359,7 @@ namespace StorageParts
             addButton.Visibility = Visibility.Visible;
         }
 
+        //TODO:Переписать алгоритм.
         /// <summary>
         /// Метод инициализации коллекции parts из выбранного пользователем файла.
         /// </summary>
@@ -356,6 +383,7 @@ namespace StorageParts
         {
             ListBoxItem listBoxItem = new ListBoxItem() { Content = s, Style = (Style)Application.Current.Resources["stackElement"] };
             listBoxItem.Tapped += Tap_To_Table;
+            //TODO: Вложить ToolTip
             stackPanel.Children.Add(listBoxItem);
         }
 
@@ -479,6 +507,11 @@ namespace StorageParts
             //Включаем кнопки.Таблица не пуста.
             editPartButton.IsEnabled = true;
             deletePartButton.IsEnabled = true;
+        }
+
+        private void showTip(object sender, RoutedEventArgs e)
+        {
+            
         }
         #endregion
     }
