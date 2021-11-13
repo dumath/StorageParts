@@ -211,11 +211,11 @@ namespace StorageParts
             fileOpenPicker.ViewMode = PickerViewMode.List;
             fileOpenPicker.FileTypeFilter.Add("*");
             StorageFile storageFile = await fileOpenPicker.PickSingleFileAsync();
-            this.strings = new List<string>();
             if (storageFile != null)
             {
                 try
                 {
+                    this.strings = new List<string>();
                     numColumn.Children.Clear();
                     brandColumn.Children.Clear();
                     nameColumn.Children.Clear();
@@ -244,6 +244,11 @@ namespace StorageParts
                 {
                     MessageDialog msg = new MessageDialog(ex.Message);
                     msg.ShowAsync();
+                    
+                }
+                finally
+                {
+                    
                 }
             }
         }
@@ -349,7 +354,11 @@ namespace StorageParts
         #endregion
 
         #region Other Methods.
-        //Мето возвращения на сетку главного окна.
+        /// <summary>
+        /// Метод возвращения на сетку главного окна.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ReturnToMainWindow(object sender, RoutedEventArgs e)
         {
             this.activeWindow.Visibility = Visibility.Collapsed;
@@ -370,7 +379,17 @@ namespace StorageParts
             if (parts != null)
             {
                 this.parts.Add(p);
-                storageTable.Items.Add(p.ToString());
+                this.putData(p.ID.ToString(), numColumn);
+                this.putData(p.Brand, brandColumn);
+                this.putData(p.Name, nameColumn);
+                this.putData(p.OriginalNumber, originalColumn);
+                this.putData(p.AnalogNumber, analogColumn);
+                this.putData(p.Count.ToString(), countColumn);
+                this.putData(p.BuyPrice.ToString(), buyPriceColumn);
+                this.putData(p.SellPrice.ToString(), sellPriceColumn);
+                this.putData(p.FirstComment, firstCommentColumn);
+                this.putData(p.SecondComment, secondCommentColumn);
+                
             }
         }
 
@@ -381,7 +400,7 @@ namespace StorageParts
         /// <param name="stackPanel">Столбец в таблице</param>
         private void putData(string s, StackPanel stackPanel)
         {
-            ListBoxItem listBoxItem = new ListBoxItem() { Content = s, Style = (Style)Application.Current.Resources["stackElement"] };
+            ListBoxItem listBoxItem = new ListBoxItem() { Content = s, Style = (Style)Application.Current.Resources["stackElement"], MinWidth = 50, MinHeight = 40 };
             listBoxItem.Tapped += Tap_To_Table;
             //TODO: Вложить ToolTip
             stackPanel.Children.Add(listBoxItem);
@@ -488,8 +507,7 @@ namespace StorageParts
             if (listBoxItems.Count != 0)
             {
                 foreach (ListBoxItem l in listBoxItems)
-                    l.Background = new SolidColorBrush(Windows.UI.Colors.Transparent);
-
+                    l.Background = new SolidColorBrush(Windows.UI.Colors.White);
                 listBoxItems.Clear();
             }
             listBoxItems.Add(numColumn.Children[i] as ListBoxItem);
@@ -503,7 +521,7 @@ namespace StorageParts
             listBoxItems.Add(firstCommentColumn.Children[i] as ListBoxItem);
             listBoxItems.Add(secondCommentColumn.Children[i] as ListBoxItem);
             foreach (ListBoxItem l in listBoxItems)
-                l.Background = new SolidColorBrush(Windows.UI.Colors.Beige);
+                l.Background = new SolidColorBrush(Windows.UI.Colors.LightGray); //Ivory для Mouse Entered
             //Включаем кнопки.Таблица не пуста.
             editPartButton.IsEnabled = true;
             deletePartButton.IsEnabled = true;
@@ -514,5 +532,6 @@ namespace StorageParts
             
         }
         #endregion
+
     }
 }

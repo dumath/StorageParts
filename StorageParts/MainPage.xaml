@@ -71,12 +71,6 @@
                         <ColumnDefinition Width="10*"/>
                         <ColumnDefinition Width="10"/>
                     </Grid.ColumnDefinitions>
-                    
-                    <!--Тестовый контейнер.-->
-                    <ListBox x:Name="storageTable" Grid.Row="1" Grid.Column="1" Visibility="Collapsed"  ScrollViewer.HorizontalScrollMode="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
-
-                    </ListBox>
-
                     <!--Действующая сетка. Отображение данных.-->
                     <Grid Grid.Row="1" Grid.Column="1" x:Name="storageTableTwo" Margin="20">
                         <Grid.RowDefinitions>

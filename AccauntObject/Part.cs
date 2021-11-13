@@ -13,7 +13,7 @@ namespace AccauntObject
         //TODO:порядковый номер : для всех объектов(собственность класса)
         private readonly int _id;
         private static int _number = 0;     //Общее количество созданных объектов.
-        private static int _numberDeleted;  //ЧИсло удаленных объектов.
+        private static int _numberDeleted;  //Число удаленных объектов.//TODO:
         private string _brand;              //Бренд
         private string _name;               //Класс запчасти - наименование.
         private string _originalNumber;     //Номер по оригиналу 
@@ -35,7 +35,7 @@ namespace AccauntObject
         public Part(string brand, string name, string originalNumber, string analogNumber, int count, decimal buyPrice, decimal sellPrice, string firstComment, string secondCcomment)
         {
             _number += 1;
-            this._id = _number;
+            this._id = _number; //TODO:Поменять инициализацию из xaml.cs
             this._brand = brand;
             this._name = name;
             this._originalNumber = originalNumber;
@@ -51,11 +51,11 @@ namespace AccauntObject
         public Part(string stringDb)
         {
             string num = stringDb.Substring(stringDb.IndexOf("Num:"), stringDb.IndexOf("; Brand:"));
-            num = num.Substring(5);
+            num = num.Substring(4);
             this._id = Int32.Parse(num);
             
             string brand = stringDb.Substring(stringDb.IndexOf("Brand:"));
-            brand = brand.Substring(stringDb.IndexOf("Brand:"), stringDb.IndexOf("; Name"));
+            brand = brand.Substring(brand.IndexOf("Brand:"), brand.IndexOf("; Name:"));
             brand = brand.Substring(6);
             this._brand = brand;
 
@@ -100,7 +100,6 @@ namespace AccauntObject
 
             //TODO:Исправить логику.
             _number += 1;
-            this._id = _number;
         }
 
         //Активный конструктор: Для инициализации через инициализатор объекта.
