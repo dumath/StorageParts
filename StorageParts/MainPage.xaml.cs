@@ -531,7 +531,36 @@ namespace StorageParts
         {
             
         }
+
+
         #endregion
 
+        /// <summary>
+        /// Метод проверки правильности ввода.
+        /// </summary>
+        /// <param name="sender">Поле, которое вызвало проверку.</param>
+        /// <param name="e">Не используется.</param>
+        private void validatingTextField(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (textBox != null)
+            {
+                textBox.BorderBrush = new SolidColorBrush(new Windows.UI.Color() { A = 102, R = 0, G = 0, B = 0 }); //Возвращаем на цвет по дефолту.
+                foreach(char c in textBox.Text)
+                {
+                    switch(c)
+                    {
+                        case '{':
+                        case '}':
+                        case '[':
+                        case ']':
+                        case '<':
+                        case '>':
+                            textBox.BorderBrush = new SolidColorBrush(Windows.UI.Colors.Red);
+                            break;
+                    }
+                }
+            }
+        }
     }
 }

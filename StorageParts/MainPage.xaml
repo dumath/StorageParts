@@ -63,7 +63,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="10"/>
                         <RowDefinition Height="10*"/>
-                        <RowDefinition MinHeight="70" MaxHeight="80" Height="*"/>
+                        <RowDefinition MinHeight="50" MaxHeight="60" Height="*"/>
                         <RowDefinition Height="10"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
@@ -182,25 +182,11 @@
                     </Grid>
                     
                     <!--Нижний бар кнопок.-->
-                    <AppBar x:Name="appBarSP" Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,4,4" Background="Transparent" Width="400">
-                        <Grid >
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="60"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="10"/>
-                                <ColumnDefinition Width="8*"/>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="10"/>
-                            </Grid.ColumnDefinitions>
-                            <AppBarButton x:Name="addPartButton" Grid.Column="2" Label="Добавить" Icon="Add"    VerticalAlignment="Center" HorizontalAlignment="Center" Click="Click_Add"/>
-                            <AppBarButton x:Name="editPartButton" Grid.Column="3" Label="Изменить" Icon="Edit"   VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="False" Click="Click_Edit"/>
-                            <AppBarButton x:Name="deletePartButton" Grid.Column="4" Label="Удалить"  Icon="Delete" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="False" Click="Click_Delete">
-                            </AppBarButton>
-                        </Grid>
-                    </AppBar>
+                    <CommandBar x:Name="appBarSP" Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="Transparent" Width="400" ClosedDisplayMode="Minimal">
+                        <AppBarButton x:Name="addPartButton" Grid.Column="2" Label="Добавить" Icon="Add"    VerticalAlignment="Center" HorizontalAlignment="Center" Click="Click_Add"/>
+                        <AppBarButton x:Name="editPartButton" Grid.Column="3" Label="Изменить" Icon="Edit"   VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="False" Click="Click_Edit"/>
+                        <AppBarButton x:Name="deletePartButton" Grid.Column="4" Label="Удалить"  Icon="Delete" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="False" Click="Click_Delete"/>
+                    </CommandBar>
                 </Grid>
 
                 <!--Сетка окна добавления объекта.-->
@@ -231,20 +217,20 @@
                     </Grid.ColumnDefinitions>
                     <!--БРЕНД-->
                     <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Бренд" TextAlignment="Left" Width="180" />
-                    <TextBox x:Name="brandField"  Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="" PlaceholderText="Наименование бренда" TextAlignment="Right" Width="180"/>
+                    <TextBox x:Name="brandField"  Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="" PlaceholderText="Наименование бренда" TextAlignment="Right" Width="180" TextChanged="validatingTextField"/>
                     <TextBlock Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" Text="" TextAlignment="Center"/>
 
                     <!--ИМЯ-->
                     <TextBlock Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Наименование" TextAlignment="Left" Width="180"/>
-                    <TextBox x:Name="nameField"  Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="" PlaceholderText="Наименование запчасти" TextAlignment="Right" Width="180"/>
+                    <TextBox x:Name="nameField"  Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="" PlaceholderText="Наименование запчасти" TextAlignment="Right" Width="180" TextChanged="validatingTextField"/>
 
                     <!--НОМЕР ОРИГИНАЛА-->
                     <TextBlock Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Номер оригинала" TextAlignment="Left" Width="180"/>
-                    <TextBox x:Name="onNumField"   Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" PlaceholderText="Артикул" TextAlignment="Right" Width="180"/>
+                    <TextBox x:Name="onNumField"   Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" PlaceholderText="Артикул" TextAlignment="Right" Width="180" TextChanged="validatingTextField"/>
 
                     <!--НОМЕР АНАЛОГА-->
                     <TextBlock Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Номер аналога" TextAlignment="Left" Width="180"/>
-                    <TextBox x:Name="anNumField"  Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" PlaceholderText="Артикул" TextAlignment="Right" Width="180"/>
+                    <TextBox x:Name="anNumField"  Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" PlaceholderText="Артикул" TextAlignment="Right" Width="180" TextChanged="validatingTextField"/>
 
                     <!--КОЛИЧЕСТВО-->
                     <TextBlock Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Количество" TextAlignment="Left" Width="180"/>
