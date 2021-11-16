@@ -394,7 +394,7 @@ namespace StorageParts
         }
 
         /// <summary>
-        /// Метода добавления данных в сетку таблицы.
+        /// Метод добавления данных в сетку таблицы.
         /// </summary>
         /// <param name="s">Значение</param>
         /// <param name="stackPanel">Столбец в таблице</param>

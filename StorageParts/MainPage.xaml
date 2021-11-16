@@ -210,51 +210,52 @@
                         <RowDefinition Height="10"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="40"/>
                         <ColumnDefinition Width="200"/>
+                        <ColumnDefinition MinWidth="10" Width="100"/>
                         <ColumnDefinition MinWidth="200" Width="*"/>
-                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
                     <!--БРЕНД-->
                     <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Бренд" TextAlignment="Left" Width="180" />
-                    <TextBox x:Name="brandField"  Grid.Row="1" Grid.Column="2" Style="{StaticResource textBoxAddStyle}" Text="" PlaceholderText="Наименование бренда" TextChanged="validatingTextField"/>
+                    <TextBox x:Name="brandField"  Grid.Row="1" Grid.Column="3" Style="{StaticResource textBoxAddStyle}" Text="" PlaceholderText="Наименование бренда" TextChanged="validatingTextField"/>
 
                     <!--ИМЯ-->
                     <TextBlock Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Наименование" TextAlignment="Left" Width="180"/>
-                    <TextBox x:Name="nameField"  Grid.Row="2" Grid.Column="2" Style="{StaticResource textBoxAddStyle}"  Text="" PlaceholderText="Наименование запчасти" TextChanged="validatingTextField"/>
+                    <TextBox x:Name="nameField"  Grid.Row="2" Grid.Column="3" Style="{StaticResource textBoxAddStyle}"  Text="" PlaceholderText="Наименование запчасти" TextChanged="validatingTextField"/>
 
                     <!--НОМЕР ОРИГИНАЛА-->
                     <TextBlock Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Номер оригинала" TextAlignment="Left" Width="180"/>
-                    <TextBox x:Name="onNumField"   Grid.Row="3" Grid.Column="2" Style="{StaticResource textBoxAddStyle}" PlaceholderText="Артикул" TextChanged="validatingTextField"/>
+                    <TextBox x:Name="onNumField"   Grid.Row="3" Grid.Column="3" Style="{StaticResource textBoxAddStyle}" PlaceholderText="Артикул" TextChanged="validatingTextField"/>
 
                     <!--НОМЕР АНАЛОГА-->
                     <TextBlock Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Номер аналога" TextAlignment="Left" Width="180"/>
-                    <TextBox x:Name="anNumField"  Grid.Row="4" Grid.Column="2" Style="{StaticResource textBoxAddStyle}" PlaceholderText="Артикул" TextChanged="validatingTextField"/>
+                    <TextBox x:Name="anNumField"  Grid.Row="4" Grid.Column="3" Style="{StaticResource textBoxAddStyle}" PlaceholderText="Артикул" TextChanged="validatingTextField"/>
 
                     <!--КОЛИЧЕСТВО-->
                     <TextBlock Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Количество" TextAlignment="Left" Width="180"/>
-                    <TextBox x:Name="countField"  Grid.Row="5" Grid.Column="2" Style="{StaticResource textBoxAddStyle}" PlaceholderText="Количество" TextChanged="validIntegerField"/>
+                    <TextBox x:Name="countField"  Grid.Row="5" Grid.Column="3" Style="{StaticResource textBoxAddStyle}" PlaceholderText="Количество" TextChanged="validIntegerField"/>
 
                     <!--ЦЕНА ПОКУПКИ-->
                     <TextBlock Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Цена за Ед.(Покупка)" TextAlignment="Left" Width="180"/>
-                    <TextBox x:Name="buyField"  Grid.Row="6" Grid.Column="2" Style="{StaticResource textBoxAddStyle}" PlaceholderText="Цена за Ед." TextChanged="validDecimalField"/>
+                    <TextBox x:Name="buyField"  Grid.Row="6" Grid.Column="3" Style="{StaticResource textBoxAddStyle}" PlaceholderText="Цена за Ед." TextChanged="validDecimalField"/>
 
                     <!--ЦЕНА ПРОДАЖИ-->
                     <TextBlock Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Цена за Ед.(Продажа)" TextAlignment="Left" Width="180"/>
-                    <TextBox x:Name="sellField"   Grid.Row="7" Grid.Column="2" Style="{StaticResource textBoxAddStyle}" PlaceholderText="Цена за Ед." TextChanged="validDecimalField"/>
+                    <TextBox x:Name="sellField"   Grid.Row="7" Grid.Column="3" Style="{StaticResource textBoxAddStyle}" PlaceholderText="Цена за Ед." TextChanged="validDecimalField"/>
 
                     <!--ПЕРВЫЙ КОММЕНТАРИЙ-->
                     <TextBlock Grid.Row="8" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Комментарий 1" TextAlignment="Left" Width="180"/>
-                    <TextBox x:Name="fcField"   Grid.Row="8" Grid.Column="2" Style="{StaticResource textBoxAddStyle}" Text="" PlaceholderText="Текст комментария"/>
+                    <TextBox x:Name="fcField"   Grid.Row="8" Grid.Column="3" Style="{StaticResource textBoxAddStyle}" Text="" PlaceholderText="Текст комментария"/>
 
                     <!--ВТОРОЙ КОММЕНТАРИЙ-->
                     <TextBlock Grid.Row="9" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Комментарий 2" TextAlignment="Left" Width="180"/>
-                    <TextBox x:Name="scField"   Grid.Row="9" Grid.Column="2" Style="{StaticResource textBoxAddStyle}" Text="" PlaceholderText="Текст комментария" />
+                    <TextBox x:Name="scField"   Grid.Row="9" Grid.Column="3" Style="{StaticResource textBoxAddStyle}" Text="" PlaceholderText="Текст комментария" />
 
                     <!---->
-                    <Button Grid.Row="10" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" Content="Отмена" Width="80" Click="ReturnToMainWindow"/>
-                    <Button x:Name="addButton" Visibility="Visible" Grid.Row="10" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0" Content="Добавить" Width="80" Click="Save_Click"/>
-                    <Button x:Name="changeButton" Visibility="Collapsed" Grid.Row="10" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0" Content="Изменить" Width="90" Click="Change_CLick"/>
+                    <Button Grid.Row="10" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,120,0" Content="Отмена" Width="80" Click="ReturnToMainWindow"/>
+                    <Button x:Name="addButton" Visibility="Visible" Grid.Row="10" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0" Content="Добавить" Width="80" Click="Save_Click"/>
+                    <Button x:Name="changeButton" Visibility="Collapsed" Grid.Row="10" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0" Content="Изменить" Width="90" Click="Change_CLick"/>
                 </Grid>
             </Grid>
         </SplitView>
