@@ -244,11 +244,11 @@ namespace StorageParts
                 {
                     MessageDialog msg = new MessageDialog(ex.Message);
                     msg.ShowAsync();
-                    
+
                 }
                 finally
                 {
-                    
+
                 }
             }
         }
@@ -389,7 +389,7 @@ namespace StorageParts
                 this.putData(p.SellPrice.ToString(), sellPriceColumn);
                 this.putData(p.FirstComment, firstCommentColumn);
                 this.putData(p.SecondComment, secondCommentColumn);
-                
+
             }
         }
 
@@ -411,7 +411,7 @@ namespace StorageParts
         /// </summary>
         /// <param name="sender">Не используется.</param>
         /// <param name="e">Не используется.</param>
-        private void Save_Click(object sender, RoutedEventArgs e)
+        private void Save_Click(object sender, RoutedEventArgs e) //TODO:Переименовать метод и реорганизовать. Слишком длинный.
         {
             try
             {
@@ -450,6 +450,7 @@ namespace StorageParts
             }
             catch (Exception ex)
             {
+                //TODO:УБрать, после описания методов валидации.PS:Метод Парсировки, из сетки добавления объектов, больше не должен вызывать исключение приведения типов.
                 MessageDialog msg = new MessageDialog(ex.Message, ex.Source);
                 msg.ShowAsync();
             }
@@ -529,26 +530,24 @@ namespace StorageParts
 
         private void showTip(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
-
-        #endregion
-
         /// <summary>
-        /// Метод проверки правильности ввода.
+        /// Метод проверки правильности ввода(Текст).
         /// </summary>
         /// <param name="sender">Поле, которое вызвало проверку.</param>
         /// <param name="e">Не используется.</param>
         private void validatingTextField(object sender, TextChangedEventArgs e)
         {
+            //TODO: Если программа не переносится в облако, поставить валидацию на формат считывания из файла. Example - Name:, Brand: и т.д
             TextBox textBox = sender as TextBox;
             if (textBox != null)
             {
                 textBox.BorderBrush = new SolidColorBrush(new Windows.UI.Color() { A = 102, R = 0, G = 0, B = 0 }); //Возвращаем на цвет по дефолту.
-                foreach(char c in textBox.Text)
+                foreach (char c in textBox.Text)
                 {
-                    switch(c)
+                    switch (c)
                     {
                         case '{':
                         case '}':
@@ -562,5 +561,81 @@ namespace StorageParts
                 }
             }
         }
+
+        /// <summary>
+        /// Метод проверки правильности ввода(Целочисленный тип).
+        /// </summary>
+        /// <param name="sender">Поле, которое вызвало проверку.</param>
+        /// <param name="e">Не используется.</param>
+        private void validIntegerField(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (textBox != null)
+            {
+                textBox.BorderBrush = new SolidColorBrush(new Windows.UI.Color() { A = 102, R = 0, G = 0, B = 0 }); //Возвращаем на цвет по дефолту.
+                foreach (char c in textBox.Text)
+                {
+                    switch (c)
+                    {
+                        case '0':
+                        case '1':
+                        case '2':
+                        case '3':
+                        case '4':
+                        case '5':
+                        case '6':
+                        case '7':
+                        case '8':
+                        case '9':
+                            break;
+                        default:
+                            textBox.BorderBrush = new SolidColorBrush(Windows.UI.Colors.Red);
+                            break;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Метод проверки правильности ввода(Денежный тип).
+        /// </summary>
+        /// <param name="sender">Поле, которое вызвало проверку.</param>
+        /// <param name="e">Не используется.</param>
+        private void validDecimalField(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (textBox != null)
+            {
+                textBox.BorderBrush = new SolidColorBrush(new Windows.UI.Color() { A = 102, R = 0, G = 0, B = 0 }); //Возвращаем на цвет по дефолту.
+                //Проверяем соответствие символов
+                foreach (char c in textBox.Text)
+                {
+                    switch (c)
+                    {
+                        case '0':
+                        case '1':
+                        case '2':
+                        case '3':
+                        case '4':
+                        case '5':
+                        case '6':
+                        case '7':
+                        case '8':
+                        case '9':
+                        case ',':
+                            break;
+                        default:
+                            textBox.BorderBrush = new SolidColorBrush(Windows.UI.Colors.Red);
+                            break;
+                    }
+                }
+                //Проверяем количество запятых
+                if (textBox.Text.Count<Char>(x => x.Equals(',')) > 1)
+                    textBox.BorderBrush = new SolidColorBrush(Windows.UI.Colors.Red);
+            }
+        }
+        #endregion
+
+
     }
 }

@@ -219,7 +219,7 @@ namespace AccauntObject
             return $"Num:{this._id}; Brand:{this._brand}; Name:{this._name}; ON:{this._originalNumber}; AN:{this._analogNumber}; Count:{this._count}; BuyPrice:{this._buyPrice}; SellPrice:{this._sellPrice}; FC:{this._firstComment}; SC:{this._secondComment}";
         }
 
-        //TODO: Отпадает??
+        //TODO: Сортировка, сравнение. Оставить.
         //TODO: Реализовать сравнение Hash
         //Метод сравнения двух Part объектов.
         public override bool Equals(object obj)
